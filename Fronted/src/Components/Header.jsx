@@ -8,7 +8,7 @@ function Header() {
                 <Link to="/migrantes" className="hover:text-blue-200 transition-colors">Migrantes</Link>
                 <Link to="/migrantes/novo" className="hover:text-blue-200 transition-colors">Cadastrar Migrante</Link>
                 <Link to="/empresas" className="hover:text-blue-200 transition-colors">Empresas</Link>
-                <Link to="/toti" className="hover:text-blue-200 transition-colors">Toti</Link>
+                <Link to="/toti" className="hover:text-blue-200 transition-colors">Sobre a Toti</Link>
                 <Link to="/estatisticas" className="hover:text-blue-200 transition-colors">Estatísticas</Link>
             </nav>
         </header>

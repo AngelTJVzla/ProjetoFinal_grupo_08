@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 function FormCompany({ addEmpresa }) {
     const [form, setForm] = useState({
-        nombre: "",
-        sector: "",
-        contacto: "",
-        ayuda: ""
+        nome: "",
+        setor: "",
+        contato: "",
+        ajuda: ""
     });
 
     const handleChange = (e) => {
@@ -14,17 +14,22 @@ function FormCompany({ addEmpresa }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addEmpresa(form);
-        setForm({ nombre: "", sector: "", contacto: "", ayuda: "" });
+        addEmpresa({
+            nombre: form.nome, // backend espera 'nombre'
+            sector: form.setor,
+            contacto: form.contato,
+            ayuda: form.ajuda
+        });
+        setForm({ nome: "", setor: "", contato: "", ajuda: "" });
     };
 
     return (
         <form onSubmit={handleSubmit} className="bg-white p-4 rounded-lg shadow mb-6 border border-blue-100">
-            <h3 className="font-semibold text-blue-700 mb-2">Registrar nueva empresa</h3>
-            <input className="form-input mb-2 p-2 border rounded w-full" name="nombre" value={form.nombre} onChange={handleChange} placeholder="Nombre de la empresa" required />
-            <input className="form-input mb-2 p-2 border rounded w-full" name="sector" value={form.sector} onChange={handleChange} placeholder="Sector" required />
-            <input className="form-input mb-2 p-2 border rounded w-full" name="contacto" value={form.contacto} onChange={handleChange} placeholder="Contacto (email o teléfono)" required />
-            <input className="form-input mb-2 p-2 border rounded w-full" name="ayuda" value={form.ayuda} onChange={handleChange} placeholder="Tipo de ayuda ofrecida" required />
+            <h3 className="font-semibold text-blue-700 mb-2">Registrar nova empresa</h3>
+            <input className="form-input mb-2 p-2 border rounded w-full" name="nome" value={form.nome} onChange={handleChange} placeholder="Nome da empresa" required />
+            <input className="form-input mb-2 p-2 border rounded w-full" name="setor" value={form.setor} onChange={handleChange} placeholder="Setor" required />
+            <input className="form-input mb-2 p-2 border rounded w-full" name="contato" value={form.contato} onChange={handleChange} placeholder="Contato (e-mail ou telefone)" required />
+            <input className="form-input mb-2 p-2 border rounded w-full" name="ajuda" value={form.ajuda} onChange={handleChange} placeholder="Tipo de ajuda oferecida" required />
             <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded w-full mt-2" type="submit">Registrar empresa</button>
         </form>
     );

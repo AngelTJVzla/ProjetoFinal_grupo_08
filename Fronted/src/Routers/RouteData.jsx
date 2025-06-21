@@ -11,7 +11,7 @@ function RouteData({ resultado, setResultado, fetchProdutos }) {
       <Header />
       <div>
         <FormData resultado={resultado} setResultado={setResultado} fetchProdutos={fetchProdutos} />
-        <button onClick={() => navigate("/")}>Volver</button>
+        <button onClick={() => navigate("/")}>Voltar</button>
       </div>
       <Footer />
     </>

@@ -9,11 +9,11 @@ export default function Root() {
   const fetchProdutos = async () => {
     try {
       const res = await fetch('http://localhost:3000');
-      if (!res.ok) throw new Error('Error al obtener productos');
+      if (!res.ok) throw new Error('Erro ao obter produtos');
       const data = await res.json();
       setResultado(data);
     } catch (error) {
-      console.error('Error en fetchProdutos:', error);
+      console.error('Erro em fetchProdutos:', error);
     }
   };
   useEffect(() => { fetchProdutos(); }, []);
