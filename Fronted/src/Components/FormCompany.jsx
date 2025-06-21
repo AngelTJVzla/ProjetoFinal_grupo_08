@@ -30,7 +30,7 @@ function FormCompany({ addEmpresa }) {
             <input className="form-input mb-2 p-2 border rounded w-full" name="setor" value={form.setor} onChange={handleChange} placeholder="Setor" required />
             <input className="form-input mb-2 p-2 border rounded w-full" name="contato" value={form.contato} onChange={handleChange} placeholder="Contato (e-mail ou telefone)" required />
             <input className="form-input mb-2 p-2 border rounded w-full" name="ajuda" value={form.ajuda} onChange={handleChange} placeholder="Tipo de ajuda oferecida" required />
-            <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded w-full mt-2" type="submit">Registrar empresa</button>
+            <button className="btn-effect-7 w-full mt-2 bg-purple-600 text-white" type="submit">Registrar empresa</button>
         </form>
     );
 }

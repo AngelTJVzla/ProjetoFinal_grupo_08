@@ -27,10 +27,10 @@ function ListOfCompanies({ empresas, onDelete, onEdit }) {
 
     return (
         <section className="mt-8">
-            <h2 className="text-xl font-bold mb-4 text-blue-800">Empresas interessadas em ajudar</h2>
+            <h2 className="text-xl font-bold mb-4 text-white title-animate">Empresas interessadas em ajudar</h2>
             <div className="grid gap-4 md:grid-cols-2">
                 {empresas.length === 0 ? (
-                    <p className="text-gray-500">Ainda não há empresas registradas.</p>
+                    <p className="text-white text-opacity-90">Ainda não há empresas registradas.</p>
                 ) : (
                     empresas.map((empresa, idx) => (
                         <div key={empresa.id || idx} className="bg-white border border-blue-100 rounded-lg p-4 shadow flex flex-col gap-2">
@@ -58,9 +58,9 @@ function ListOfCompanies({ empresas, onDelete, onEdit }) {
                             ) : (
                                 <>
                                     <h3 className="font-semibold text-lg text-blue-700">{empresa.nombre}</h3>
-                                    <p className="text-sm text-gray-700">Setor: {empresa.sector}</p>
-                                    <p className="text-sm text-gray-700">Contato: {empresa.contacto}</p>
-                                    <p className="text-sm text-gray-700">Tipo de ajuda: {empresa.ayuda}</p>
+                                    <p className="text-sm text-gray-700 text-opacity-60">Setor: {empresa.sector}</p>
+                                    <p className="text-sm text-gray-700 text-opacity-60">Contato: {empresa.contacto}</p>
+                                    <p className="text-sm text-gray-700 text-opacity-60">Tipo de ajuda: {empresa.ayuda}</p>
                                     <div className="flex gap-2 self-end">
                                         {onEdit && (
                                             <button

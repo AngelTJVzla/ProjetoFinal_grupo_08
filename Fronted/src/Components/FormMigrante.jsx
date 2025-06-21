@@ -43,7 +43,7 @@ function FormMigrante({ addMigrante }) {
             <input className="form-input mb-2 p-2 border rounded w-full" name="habilidades" value={form.habilidades} onChange={handleChange} placeholder="Habilidades ou profissão" required />
             <input className="form-input mb-2 p-2 border rounded w-full" name="email" value={form.email} onChange={handleChange} placeholder="E-mail" required type="email" />
             {error && <p className="text-red-600 text-sm mb-2">{error}</p>}
-            <button className="bg-amber-600 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded w-full mt-2" type="submit">Registrar migrante</button>
+            <button className="btn-effect-7 w-full mt-2 bg-purple-600 text-white" type="submit">Registrar migrante</button>
         </form>
     );
 }

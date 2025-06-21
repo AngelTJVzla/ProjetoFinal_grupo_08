@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import FormCompany from "./Components/FormCompany";
+import Footer from "./Components/Footer"; // Asegúrate de importar el Footer
 import "./Styles/app.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -171,9 +172,10 @@ function Main() {
                 />
             </div>
             {/* Formulario para registrar empresas */}
-            <div className="container mx-auto max-w-xl mt-8">
+            <div className="container mx-auto max-w-xl mt-8 mb-16">
                 <FormCompany addEmpresa={addEmpresa} />
             </div>
+            <Footer />
         </>
     );
 }
