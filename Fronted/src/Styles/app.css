@@ -1,69 +1,80 @@
 @import "tailwindcss";
 
-/* Elimina estilos personalizados, usa solo utilidades de Tailwind en los componentes */
+/* Efectos para botones tipo btn-effect-18 (editar, excluir, salvar, cancelar) */
+.btn-effect-18-blue::after, .btn-effect-18-red::after, .btn-effect-18-green::after, .btn-effect-18-gray::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+  transition: left 0.4s ease;
+}
+.btn-effect-18-blue:hover::after { left: 100%; }
+.btn-effect-18-blue:hover { box-shadow: 0 0 10px #2563eb, 0 0 30px #2563eb; }
+.btn-effect-18-red:hover::after { left: 100%; }
+.btn-effect-18-red:hover { box-shadow: 0 0 10px #dc2626, 0 0 30px #dc2626; }
+.btn-effect-18-green:hover::after { left: 100%; }
+.btn-effect-18-green:hover { box-shadow: 0 0 10px #22c55e, 0 0 30px #22c55e; }
+.btn-effect-18-gray:hover::after { left: 100%; }
+.btn-effect-18-gray:hover { box-shadow: 0 0 10px #6b7280, 0 0 30px #6b7280; }
 
-/* Efecto tipo btn-effect-18 para botones editar y excluir */
-.btn-effect-18-blue::after {
+/* Efecto tipo btn-effect-7 para botones principales */
+.btn-effect-7 {
+  background-color: #a78bfa;
+  color: #fff;
+  border: 2px solid #c4b5fd;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-effect-7:hover {
+  animation: lightning-purple 1.5s infinite;
+  background-color: #7c3aed;
+  border-color: #7c3aed;
+}
+@keyframes lightning-purple {
+  0%, 100% { box-shadow: 0 0 0 0 #a78bfa; }
+  20% { box-shadow: 0 0 10px 2px #a78bfa; }
+  40% { box-shadow: 0 0 20px 4px #a78bfa; }
+  60% { box-shadow: 0 0 10px 2px #a78bfa; }
+  80% { box-shadow: 0 0 0 0 #a78bfa; }
+}
+
+/* Animación para títulos (fade-in + resplandor) */
+.title-animate {
+  animation: fadeInGlow 1.2s ease;
+  text-shadow: 0 0 8px #a78bfa, 0 0 16px #c4b5fd;
+}
+@keyframes fadeInGlow {
+  0% { opacity: 0; filter: blur(4px); }
+  60% { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; filter: blur(0); }
+}
+
+/* Fondo personalizado con opacidad para la imagen de CSS Grid */
+.bg-css-grid {
+  background-image: url('/inmigrantes.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.bg-css-grid::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
-  transition: left 0.4s ease;
+  inset: 0;
+  background: rgba(0,0,0,0.45); /* Opacidad del fondo */
+  z-index: 0;
+  pointer-events: none;
 }
-.btn-effect-18-blue:hover::after {
-  left: 100%;
-}
-.btn-effect-18-blue:hover {
-  box-shadow: 0 0 10px #2563eb, 0 0 30px #2563eb;
-}
-.btn-effect-18-red::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
-  transition: left 0.4s ease;
-}
-.btn-effect-18-red:hover::after {
-  left: 100%;
-}
-.btn-effect-18-red:hover {
-  box-shadow: 0 0 10px #dc2626, 0 0 30px #dc2626;
-}
-.btn-effect-18-green::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
-  transition: left 0.4s ease;
-}
-.btn-effect-18-green:hover::after {
-  left: 100%;
-}
-.btn-effect-18-green:hover {
-  box-shadow: 0 0 10px #22c55e, 0 0 30px #22c55e;
-}
-.btn-effect-18-gray::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
-  transition: left 0.4s ease;
-}
-.btn-effect-18-gray:hover::after {
-  left: 100%;
-}
-.btn-effect-18-gray:hover {
-  box-shadow: 0 0 10px #6b7280, 0 0 30px #6b7280;
+
+/* Para asegurar que el contenido esté sobre el fondo */
+.bg-css-grid > * {
+  position: relative;
+  z-index: 1;
 }
