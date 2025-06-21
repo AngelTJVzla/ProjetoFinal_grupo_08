@@ -67,24 +67,24 @@ function Main() {
 
     // Eliminar migrante con confirmación
     const onDeleteMigrante = async (id) => {
-        if (window.confirm("¿Estás seguro de que deseas eliminar este migrante?")) {
+        if (window.confirm("Tem certeza de que deseja excluir este migrante?")) {
             try {
                 await fetch(`http://localhost:3000/migrantes/${id}`, { method: "DELETE" });
                 fetchMigrantes();
             } catch (error) {
-                console.error("Error al eliminar migrante:", error);
+                console.error("Error ao eliminar migrante:", error);
             }
         }
     };
 
     // Eliminar empresa con confirmación
     const onDeleteEmpresa = async (id) => {
-        if (window.confirm("¿Estás seguro de que deseas eliminar esta empresa?")) {
+        if (window.confirm("Tem certeza de que deseja excluir esta empresa?")) {
             try {
                 await fetch(`http://localhost:3000/empresas/${id}`, { method: "DELETE" });
                 fetchEmpresas();
             } catch (error) {
-                console.error("Error al eliminar empresa:", error);
+                console.error("Error ao eliminar empresa:", error);
             }
         }
     };
@@ -139,15 +139,28 @@ function Main() {
 
     return (
         <>
-            <div className="container mx-auto max-w-xl mt-4 mb-2">
-                <input
-                    className="form-input w-full p-3 border-2 border-amber-400 rounded-lg focus:border-amber-700 focus:outline-none"
-                    type="text"
-                    placeholder="Buscar migrante por nombre, país o habilidad..."
-                    value={busqueda}
-                    onChange={e => setBusqueda(e.target.value)}
-                />
-            </div>
+            {/* Input de búsqueda de migrantes se pasa como prop a App */}
+            <App
+                resultado={migrantesFiltrados}
+                empresas={empresasFiltradas}
+                addMigrante={addMigrante}
+                onDeleteMigrante={onDeleteMigrante}
+                onDeleteEmpresa={onDeleteEmpresa}
+                updateMigrante={updateMigrante}
+                updateEmpresa={updateEmpresa}
+                migranteSearchInput={
+                    <div className="container mx-auto max-w-xl mt-4 mb-2">
+                        <input
+                            className="form-input w-full p-3 border-2 border-amber-400 rounded-lg focus:border-amber-700 focus:outline-none"
+                            type="text"
+                            placeholder="Buscar migrante por nombre, país o habilidad..."
+                            value={busqueda}
+                            onChange={e => setBusqueda(e.target.value)}
+                        />
+                    </div>
+                }
+            />
+            {/* Input de búsqueda de empresas encima de registrar nova empresa */}
             <div className="container mx-auto max-w-xl mt-4 mb-2">
                 <input
                     className="form-input w-full p-3 border-2 border-blue-400 rounded-lg focus:border-blue-700 focus:outline-none"
@@ -157,15 +170,6 @@ function Main() {
                     onChange={e => setBusquedaEmp(e.target.value)}
                 />
             </div>
-            <App
-                resultado={migrantesFiltrados}
-                empresas={empresasFiltradas}
-                addMigrante={addMigrante}
-                onDeleteMigrante={onDeleteMigrante}
-                onDeleteEmpresa={onDeleteEmpresa}
-                updateMigrante={updateMigrante}
-                updateEmpresa={updateEmpresa}
-            />
             {/* Formulario para registrar empresas */}
             <div className="container mx-auto max-w-xl mt-8">
                 <FormCompany addEmpresa={addEmpresa} />

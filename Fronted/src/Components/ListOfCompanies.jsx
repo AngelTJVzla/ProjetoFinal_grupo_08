@@ -41,8 +41,18 @@ function ListOfCompanies({ empresas, onDelete, onEdit }) {
                                     <input className="border p-1 rounded" name="contato" value={form.contato} onChange={handleChange} placeholder="Contato (e-mail ou telefone)" />
                                     <input className="border p-1 rounded" name="ajuda" value={form.ajuda} onChange={handleChange} placeholder="Tipo de ajuda oferecida" />
                                     <div className="flex gap-2 mt-2 self-end">
-                                        <button className="bg-green-500 hover:bg-green-700 text-white rounded px-3 py-1 text-xs" onClick={handleSave}>Salvar</button>
-                                        <button className="bg-gray-400 hover:bg-gray-600 text-white rounded px-3 py-1 text-xs" onClick={cancelEdit}>Cancelar</button>
+                                        <button
+                                            className="relative overflow-hidden px-3 py-1 text-xs rounded text-white font-semibold bg-green-500 hover:bg-green-700 btn-effect-18-green"
+                                            onClick={handleSave}
+                                        >
+                                            Salvar
+                                        </button>
+                                        <button
+                                            className="relative overflow-hidden px-3 py-1 text-xs rounded text-white font-semibold bg-gray-400 hover:bg-gray-600 btn-effect-18-gray"
+                                            onClick={cancelEdit}
+                                        >
+                                            Cancelar
+                                        </button>
                                     </div>
                                 </>
                             ) : (
@@ -53,12 +63,18 @@ function ListOfCompanies({ empresas, onDelete, onEdit }) {
                                     <p className="text-sm text-gray-700">Tipo de ajuda: {empresa.ayuda}</p>
                                     <div className="flex gap-2 self-end">
                                         {onEdit && (
-                                            <button className="bg-blue-500 hover:bg-blue-700 text-white rounded px-3 py-1 text-xs" onClick={() => startEdit(empresa)}>
+                                            <button
+                                                className="relative overflow-hidden px-3 py-1 text-xs rounded text-white font-semibold bg-blue-500 hover:bg-blue-700 btn-effect-18-blue"
+                                                onClick={() => startEdit(empresa)}
+                                            >
                                                 Editar
                                             </button>
                                         )}
                                         {onDelete && (
-                                            <button className="bg-red-500 hover:bg-red-700 text-white rounded px-3 py-1 text-xs" onClick={() => onDelete(empresa.id)}>
+                                            <button
+                                                className="relative overflow-hidden px-3 py-1 text-xs rounded text-white font-semibold bg-red-500 hover:bg-red-700 btn-effect-18-red"
+                                                onClick={() => onDelete(empresa.id)}
+                                            >
                                                 Excluir
                                             </button>
                                         )}

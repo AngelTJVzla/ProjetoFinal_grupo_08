@@ -1,3 +1,69 @@
 @import "tailwindcss";
 
 /* Elimina estilos personalizados, usa solo utilidades de Tailwind en los componentes */
+
+/* Efecto tipo btn-effect-18 para botones editar y excluir */
+.btn-effect-18-blue::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+  transition: left 0.4s ease;
+}
+.btn-effect-18-blue:hover::after {
+  left: 100%;
+}
+.btn-effect-18-blue:hover {
+  box-shadow: 0 0 10px #2563eb, 0 0 30px #2563eb;
+}
+.btn-effect-18-red::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+  transition: left 0.4s ease;
+}
+.btn-effect-18-red:hover::after {
+  left: 100%;
+}
+.btn-effect-18-red:hover {
+  box-shadow: 0 0 10px #dc2626, 0 0 30px #dc2626;
+}
+.btn-effect-18-green::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+  transition: left 0.4s ease;
+}
+.btn-effect-18-green:hover::after {
+  left: 100%;
+}
+.btn-effect-18-green:hover {
+  box-shadow: 0 0 10px #22c55e, 0 0 30px #22c55e;
+}
+.btn-effect-18-gray::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+  transition: left 0.4s ease;
+}
+.btn-effect-18-gray:hover::after {
+  left: 100%;
+}
+.btn-effect-18-gray:hover {
+  box-shadow: 0 0 10px #6b7280, 0 0 30px #6b7280;
+}
