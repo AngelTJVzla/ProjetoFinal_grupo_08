@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+/* Fondo moderno y actual para todo el proyecto */
+body {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #0f2027, #2c5364, #00c6ff, #0072ff);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
 /* Efectos para botones tipo btn-effect-18 (editar, excluir, salvar, cancelar) */
 .btn-effect-18-blue::after, .btn-effect-18-red::after, .btn-effect-18-green::after, .btn-effect-18-gray::after {
   content: '';
@@ -58,7 +72,6 @@
 
 /* Fondo personalizado con opacidad para la imagen de CSS Grid */
 .bg-css-grid {
-  background-image: url('/inmigrantes.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

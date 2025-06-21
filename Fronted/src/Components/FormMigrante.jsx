@@ -9,8 +9,15 @@ function FormMigrante({ addMigrante }) {
     });
     const [error, setError] = useState("");
 
+    const onlyLetters = (str) => /^[A-ZÁÉÍÓÚÃÕÂÊÎÔÛÇ ]+$/i.test(str);
+
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        let value = e.target.value;
+        // Convertir a mayúsculas en los campos de texto
+        if (["nome", "pais", "habilidades"].includes(e.target.name)) {
+            value = value.toUpperCase();
+        }
+        setForm({ ...form, [e.target.name]: value });
         if (e.target.name === "email") setError("");
     };
 
@@ -23,6 +30,10 @@ function FormMigrante({ addMigrante }) {
         e.preventDefault();
         if (!validateEmail(form.email)) {
             setError("Por favor, insira um e-mail válido.");
+            return;
+        }
+        if (!onlyLetters(form.nome) || !onlyLetters(form.pais) || !onlyLetters(form.habilidades)) {
+            setError("Nome, país e habilidades devem conter apenas letras e espaços.");
             return;
         }
         addMigrante({

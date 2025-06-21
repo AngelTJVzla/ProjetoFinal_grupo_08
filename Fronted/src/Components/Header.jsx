@@ -2,15 +2,11 @@ import { Link } from "react-router-dom";
 
 function Header() {
     return (
-        <header className="bg-blue-700 text-white p-4 shadow-md">
-            <nav className="flex flex-wrap gap-6 text-lg justify-center">
-                <Link to="/" className="hover:text-blue-200 transition-colors">Início</Link>
-                <Link to="/migrantes" className="hover:text-blue-200 transition-colors">Migrantes</Link>
-                <Link to="/migrantes/novo" className="hover:text-blue-200 transition-colors">Cadastrar Migrante</Link>
-                <Link to="/empresas" className="hover:text-blue-200 transition-colors">Empresas</Link>
-                <Link to="/toti" className="hover:text-blue-200 transition-colors">Sobre a Toti</Link>
-                <Link to="/estatisticas" className="hover:text-blue-200 transition-colors">Estatísticas</Link>
-            </nav>
+        <header className="bg-blue-700/60 text-white p-4 shadow-md border-b border-white/20 backdrop-blur-md">
+            <div className="text-center text-sm md:text-base font-semibold tracking-wide mb-2 text-blue-100/90 drop-shadow-lg animate-pulse">
+                Projeto Final | Grupo 08 - Turma 51 full start| React, Node.js, Tailwind, Vite, Express &amp; SQLite | CRUD funcional de migrantes e empresas
+            </div>
+            
         </header>
     );
 }

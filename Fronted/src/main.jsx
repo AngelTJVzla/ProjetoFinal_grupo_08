@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import FormCompany from "./Components/FormCompany";
-import Footer from "./Components/Footer"; // Asegúrate de importar el Footer
+import Footer from  "./Components/Footer" // Asegúrate de importar el Footer
 import "./Styles/app.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -138,9 +138,30 @@ function Main() {
         e.ayuda.toLowerCase().includes(busquedaEmp.toLowerCase())
     );
 
+    // Input controlado para buscar migrante
+    const migranteSearchInput = (
+        <input
+            className="form-input w-full p-3 border-2 border-blue-400 rounded-lg focus:border-blue-700 focus:outline-none"
+            type="text"
+            value={busqueda}
+            onChange={e => setBusqueda(e.target.value)}
+            placeholder="Buscar migrante por nome, país ou habilidade..."
+        />
+    );
+
+    // Input controlado para buscar empresa
+    const empresaSearchInput = (
+        <input
+            className="form-input w-full p-3 border-2 border-blue-400 rounded-lg focus:border-blue-700 focus:outline-none"
+            type="text"
+            value={busquedaEmp}
+            onChange={e => setBusquedaEmp(e.target.value)}
+            placeholder="Buscar empresa por nombre, sector o ayuda..."
+        />
+    );
+
     return (
         <>
-            {/* Input de búsqueda de migrantes se pasa como prop a App */}
             <App
                 resultado={migrantesFiltrados}
                 empresas={empresasFiltradas}
@@ -149,32 +170,10 @@ function Main() {
                 onDeleteEmpresa={onDeleteEmpresa}
                 updateMigrante={updateMigrante}
                 updateEmpresa={updateEmpresa}
-                migranteSearchInput={
-                    <div className="container mx-auto max-w-xl mt-4 mb-2">
-                        <input
-                            className="form-input w-full p-3 border-2 border-amber-400 rounded-lg focus:border-amber-700 focus:outline-none"
-                            type="text"
-                            placeholder="Buscar migrante por nombre, país o habilidad..."
-                            value={busqueda}
-                            onChange={e => setBusqueda(e.target.value)}
-                        />
-                    </div>
-                }
+                migranteSearchInput={migranteSearchInput}
+                empresaSearchInput={empresaSearchInput}
+                addEmpresa={addEmpresa}
             />
-            {/* Input de búsqueda de empresas encima de registrar nova empresa */}
-            <div className="container mx-auto max-w-xl mt-4 mb-2">
-                <input
-                    className="form-input w-full p-3 border-2 border-blue-400 rounded-lg focus:border-blue-700 focus:outline-none"
-                    type="text"
-                    placeholder="Buscar empresa por nombre, sector o ayuda..."
-                    value={busquedaEmp}
-                    onChange={e => setBusquedaEmp(e.target.value)}
-                />
-            </div>
-            {/* Formulario para registrar empresas */}
-            <div className="container mx-auto max-w-xl mt-8 mb-16">
-                <FormCompany addEmpresa={addEmpresa} />
-            </div>
             <Footer />
         </>
     );
