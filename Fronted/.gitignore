@@ -1,0 +1,49 @@
+# Logs
+yarn-debug.log*
+yarn-error.log*
+npm-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+logs
+*.log
+
+# Node
+node_modules/
+
+# Build
+/dist/
+/dist-ssr/
+
+# SQLite
+empresa.db
+
+# Local env
+*.local
+.env
+.env.*
+
+# Editor
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Mac
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# Others
+coverage/
