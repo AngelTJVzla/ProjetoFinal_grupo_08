@@ -35,10 +35,10 @@ function ListOfCompanies({ empresas, onDelete, onEdit }) {
     };
 
     return (
-        <section className="mt-8 col-span-1 row-span-1 h-full flex flex-col justify-center">
-            <h2 className="text-xl font-bold mb-4 text-white title-animate">Empresas interessadas em ajudar</h2>
-            <div className="overflow-x-auto mt-4">
-                <table className="min-w-full bg-white rounded-lg shadow">
+        <section className="mt-4 ">
+            <h2 className="text-lg font-bold mb-2 text-white title-animate">Empresas interessadas em ajudar</h2>
+            <div className="overflow-x-auto mt-4 scrollbar-thin scrollbar-thumb-blue-200 scrollbar-track-blue-50">
+                <table className="min-w-full bg-white rounded-lg shadow text-sm md:text-base">
                     <thead>
                         <tr>
                             <th className="px-4 py-2 border-b">Nome</th>
@@ -61,16 +61,16 @@ function ListOfCompanies({ empresas, onDelete, onEdit }) {
                                         <td className="px-2 py-1 text-gray-700 text-opacity-60">{empresa.sector}</td>
                                         <td className="px-2 py-1 text-gray-700 text-opacity-60">{empresa.contacto}</td>
                                         <td className="px-2 py-1 text-gray-700 text-opacity-60">{empresa.ayuda}</td>
-                                        <td className="px-2 py-1 flex gap-2">
+                                        <td className="px-2 py-1 flex flex-col sm:flex-row gap-2 items-stretch sm:items-center justify-center">
                                             <button
-                                                className="relative overflow-hidden px-3 py-1 text-xs rounded text-white font-semibold bg-blue-500 hover:bg-blue-700 btn-effect-18-blue"
+                                                className="relative overflow-hidden px-4 py-2 text-sm rounded text-white font-semibold bg-blue-500 hover:bg-blue-700 btn-effect-18-blue transition-all duration-200"
                                                 onClick={() => startEdit(empresa)}
                                             >
                                                 Editar
                                             </button>
                                             {onDelete && (
                                                 <button
-                                                    className="relative overflow-hidden px-3 py-1 text-xs rounded text-white font-semibold bg-red-500 hover:bg-red-700 btn-effect-18-red"
+                                                    className="relative overflow-hidden px-4 py-2 text-sm rounded text-white font-semibold bg-red-500 hover:bg-red-700 btn-effect-18-red transition-all duration-200"
                                                     onClick={() => onDelete(empresa.id)}
                                                 >
                                                     Excluir

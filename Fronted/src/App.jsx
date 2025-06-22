@@ -9,8 +9,8 @@ function App({ resultado, empresas, addMigrante, onDeleteMigrante, onDeleteEmpre
     return (
         <>
             <Header />
-            <main className="container mx-auto p-4 rounded shadow-md pb-20">
-                <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 min-h-[80vh]">
+            <main className="container mx-auto p-4 pt-8 rounded shadow-md pb-20">
+                <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 min-h-[80vh] mt-0">
                     {/* Fila 1: Buscador migrante */}
                     <div className="col-span-1 md:col-span-2 lg:col-span-4 flex flex-col justify-start bg-white/10 rounded-xl shadow-lg border border-white/20 p-4 backdrop-blur">
                         {migranteSearchInput && React.cloneElement(migranteSearchInput, {
@@ -23,7 +23,7 @@ function App({ resultado, empresas, addMigrante, onDeleteMigrante, onDeleteEmpre
                         <h2 className="text-lg font-bold mb-2 text-white title-animate">Cadastrar migrantes</h2>
                         <FormMigrante addMigrante={addMigrante} />
                     </div>
-                    <div className="col-span-1 md:col-span-1 lg:col-span-2 flex flex-col justify-start bg-white/10 rounded-xl shadow-lg border border-white/20 p-4 pt-2 backdrop-blur">
+                    <div className="col-span-1 md:col-span-1 lg:col-span-2 flex flex-col justify-start bg-white/10 rounded-xl shadow-lg border border-white/20 p-4 pt-0 backdrop-blur">
                         {resultado && resultado.length > 0 ? (
                             <ListOfMigrantes migrantes={resultado} onDelete={onDeleteMigrante} onEdit={updateMigrante} />
                         ) : (
@@ -42,7 +42,7 @@ function App({ resultado, empresas, addMigrante, onDeleteMigrante, onDeleteEmpre
                         <h2 className="text-lg font-bold mb-2 text-white title-animate">Cadastrar empresa</h2>
                         <FormCompany addEmpresa={addEmpresa} />
                     </div>
-                    <div className="col-span-1 md:col-span-1 lg:col-span-2 flex flex-col justify-start bg-white/10 rounded-xl shadow-lg border border-white/20 p-4 backdrop-blur">
+                    <div className="col-span-1 md:col-span-1 lg:col-span-2 flex flex-col justify-start bg-white/10 rounded-xl shadow-lg border border-white/20 p-4 pt-0 backdrop-blur">
                         {empresas && empresas.length > 0 ? (
                             <ListOfCompanies empresas={empresas} onDelete={onDeleteEmpresa} onEdit={updateEmpresa} />
                         ) : (

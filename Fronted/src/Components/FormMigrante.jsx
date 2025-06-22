@@ -48,13 +48,79 @@ function FormMigrante({ addMigrante }) {
 
     return (
         <form onSubmit={handleSubmit} className="bg-white p-4 rounded-lg shadow mb-6 border border-amber-200">
-            <h3 className="font-semibold text-amber-700 mb-2">Registrar migrante</h3>
+            
             <input className="form-input mb-2 p-2 border rounded w-full" name="nome" value={form.nome} onChange={handleChange} placeholder="Nome completo" required />
-            <input className="form-input mb-2 p-2 border rounded w-full" name="pais" value={form.pais} onChange={handleChange} placeholder="País de origem" required />
+            <select className="form-input mb-2 p-2 border rounded w-full" name="pais" value={form.pais} onChange={handleChange} required>
+                <option value="">Selecione o país de origem</option>
+                <option value="AFEGANISTÃO">Afeganistão</option>
+                <option value="ÁFRICA DO SUL">África do Sul</option>
+                <option value="ALEMANHA">Alemanha</option>
+                <option value="ANGOLA">Angola</option>
+                <option value="ARÁBIA SAUDITA">Arábia Saudita</option>
+                <option value="ARGENTINA">Argentina</option>
+                <option value="AUSTRÁLIA">Austrália</option>
+                <option value="ÁUSTRIA">Áustria</option>
+                <option value="BANGLADESH">Bangladesh</option>
+                <option value="BÉLGICA">Bélgica</option>
+                <option value="BOLÍVIA">Bolívia</option>
+                <option value="BRASIL">Brasil</option>
+                <option value="CANADÁ">Canadá</option>
+                <option value="CHILE">Chile</option>
+                <option value="CHINA">China</option>
+                <option value="COLÔMBIA">Colômbia</option>
+                <option value="CUBA">Cuba</option>
+                <option value="DINAMARCA">Dinamarca</option>
+                <option value="EGITO">Egito</option>
+                <option value="EMIRADOS ÁRABES UNIDOS">Emirados Árabes Unidos</option>
+                <option value="EQUADOR">Equador</option>
+                <option value="ESPANHA">Espanha</option>
+                <option value="ESTADOS UNIDOS">Estados Unidos</option>
+                <option value="FILIPINAS">Filipinas</option>
+                <option value="FINLÂNDIA">Finlândia</option>
+                <option value="FRANÇA">França</option>
+                <option value="GRÉCIA">Grécia</option>
+                <option value="GUATEMALA">Guatemala</option>
+                <option value="HAITI">Haiti</option>
+                <option value="HOLANDA">Holanda</option>
+                <option value="HONDURAS">Honduras</option>
+                <option value="HUNGRIA">Hungria</option>
+                <option value="ÍNDIA">Índia</option>
+                <option value="INDONÉSIA">Indonésia</option>
+                <option value="INGLATERRA">Inglaterra</option>
+                <option value="IRÃ">Irã</option>
+                <option value="IRAQUE">Iraque</option>
+                <option value="IRLANDA">Irlanda</option>
+                <option value="ISRAEL">Israel</option>
+                <option value="ITÁLIA">Itália</option>
+                <option value="JAPÃO">Japão</option>
+                <option value="LÍBANO">Líbano</option>
+                <option value="LUXEMBURGO">Luxemburgo</option>
+                <option value="MÉXICO">México</option>
+                <option value="MOÇAMBIQUE">Moçambique</option>
+                <option value="NIGÉRIA">Nigéria</option>
+                <option value="NORUEGA">Noruega</option>
+                <option value="NOVA ZELÂNDIA">Nova Zelândia</option>
+                <option value="PAQUISTÃO">Paquistão</option>
+                <option value="PARAGUAI">Paraguai</option>
+                <option value="PERU">Peru</option>
+                <option value="POLÔNIA">Polônia</option>
+                <option value="PORTUGAL">Portugal</option>
+                <option value="QUÊNIA">Quênia</option>
+                <option value="REINO UNIDO">Reino Unido</option>
+                <option value="REPÚBLICA DOMINICANA">República Dominicana</option>
+                <option value="RÚSSIA">Rússia</option>
+                <option value="SUÉCIA">Suécia</option>
+                <option value="SUÍÇA">Suíça</option>
+                <option value="TURQUIA">Turquia</option>
+                <option value="UCRÂNIA">Ucrânia</option>
+                <option value="URUGUAI">Uruguai</option>
+                <option value="VENEZUELA">Venezuela</option>
+                {/* Puedes agregar más países si lo deseas */}
+            </select>
             <input className="form-input mb-2 p-2 border rounded w-full" name="habilidades" value={form.habilidades} onChange={handleChange} placeholder="Habilidades ou profissão" required />
             <input className="form-input mb-2 p-2 border rounded w-full" name="email" value={form.email} onChange={handleChange} placeholder="E-mail" required type="email" />
             {error && <p className="text-red-600 text-sm mb-2">{error}</p>}
-            <button className="btn-effect-7 w-full mt-2 bg-purple-600 text-white" type="submit">Registrar migrante</button>
+            <button className="btn-effect-7 w-full mt-2 bg-purple-600 text-white" type="submit">Cadastrar migrante</button>
         </form>
     );
 }
