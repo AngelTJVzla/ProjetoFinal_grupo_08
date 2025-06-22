@@ -32,6 +32,10 @@ function FormMigrante({ addMigrante }) {
             setError("Por favor, insira um e-mail válido.");
             return;
         }
+        if (form.nome.trim().split(/\s+/).length < 2) {
+            setError("O nome deve conter pelo menos nome e sobrenome.");
+            return;
+        }
         if (!onlyLetters(form.nome) || !onlyLetters(form.pais) || !onlyLetters(form.habilidades)) {
             setError("Nome, país e habilidades devem conter apenas letras e espaços.");
             return;
@@ -50,8 +54,8 @@ function FormMigrante({ addMigrante }) {
         <form onSubmit={handleSubmit} className="bg-white p-4 rounded-lg shadow mb-6 border border-amber-200">
             
             <input className="form-input mb-2 p-2 border rounded w-full" name="nome" value={form.nome} onChange={handleChange} placeholder="Nome completo" required />
-            <select className="form-input mb-2 p-2 border rounded w-full" name="pais" value={form.pais} onChange={handleChange} required>
-                <option value="">Selecione o país de origem</option>
+            <select className="form-input mb-2 p-2 border rounded w-full font-normal text-gray-700" name="pais" value={form.pais} onChange={handleChange} required>
+                <option value="" disabled hidden>Selecione o país de origem</option>
                 <option value="AFEGANISTÃO">Afeganistão</option>
                 <option value="ÁFRICA DO SUL">África do Sul</option>
                 <option value="ALEMANHA">Alemanha</option>

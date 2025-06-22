@@ -5,6 +5,7 @@ function ListOfMigrantes({ migrantes, onDelete, onEdit }) {
     const [editId, setEditId] = useState(null);
     const [form, setForm] = useState({ nome: "", pais: "", habilidades: "", email: "" });
     const [modalOpen, setModalOpen] = useState(false);
+    const [editError, setEditError] = useState("");
 
     const startEdit = (m) => {
         setEditId(m.id);
@@ -17,9 +18,18 @@ function ListOfMigrantes({ migrantes, onDelete, onEdit }) {
         setModalOpen(false);
     };
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        let value = e.target.value;
+        if (["nome", "pais", "habilidades"].includes(e.target.name)) {
+            value = value.toUpperCase();
+        }
+        setForm({ ...form, [e.target.name]: value });
     };
     const handleSave = () => {
+        if (form.nome.trim().split(/\s+/).length < 2) {
+            setEditError("O nome deve conter pelo menos nome e sobrenome.");
+            return;
+        }
+        setEditError("");
         if (onEdit) onEdit(editId, {
             nombre: form.nome, // backend espera 'nombre'
             pais: form.pais,
@@ -82,9 +92,10 @@ function ListOfMigrantes({ migrantes, onDelete, onEdit }) {
             <ModalEdit open={modalOpen} title="Editar migrante" onClose={cancelEdit}>
                 <form className="flex flex-col gap-3">
                     <input className="border p-2 rounded" name="nome" value={form.nome} onChange={handleChange} placeholder="Nome completo" />
-                    <input className="border p-2 rounded" name="pais" value={form.pais} onChange={handleChange} placeholder="País de origem" />
+                    <input className="border p-2 rounded bg-gray-100 cursor-not-allowed" name="pais" value={form.pais} placeholder="País de origem" readOnly tabIndex={-1} />
                     <input className="border p-2 rounded" name="habilidades" value={form.habilidades} onChange={handleChange} placeholder="Habilidades ou profissão" />
                     <input className="border p-2 rounded" name="email" value={form.email} onChange={handleChange} placeholder="E-mail" />
+                    {editError && <p className="text-red-600 text-sm mb-2">{editError}</p>}
                     <div className="flex gap-2 justify-end mt-2">
                         <button type="button" className="px-4 py-1 rounded bg-green-500 text-white font-semibold hover:bg-green-700" onClick={handleSave}>Salvar</button>
                         <button type="button" className="px-4 py-1 rounded bg-gray-400 text-white font-semibold hover:bg-gray-600" onClick={cancelEdit}>Cancelar</button>
