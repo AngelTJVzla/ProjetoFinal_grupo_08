@@ -20,7 +20,8 @@ db.run(
         nombre TEXT NOT NULL,
         pais TEXT NOT NULL,
         habilidades TEXT NOT NULL,
-        email TEXT NOT NULL
+        email TEXT NOT NULL,
+        cpf TEXT
     )`,
   (err) => {
     if (err) {
@@ -36,7 +37,8 @@ db.run(
         nombre TEXT NOT NULL,
         sector TEXT NOT NULL,
         contacto TEXT NOT NULL,
-        ayuda TEXT NOT NULL
+        ayuda TEXT NOT NULL,
+        cnpj TEXT
     )`,
   (err) => {
     if (err) {
@@ -59,7 +61,7 @@ const buscarMigrantes = (callback) => {
   });
 };
 const adicionarMigrante = db.prepare(
-  `INSERT INTO Migrantes (nombre, pais, habilidades, email) VALUES (?, ?, ?, ?)`,
+  `INSERT INTO Migrantes (nombre, pais, habilidades, email, cpf) VALUES (?, ?, ?, ?, ?)`,
   (err) => {
     if (err) {
       console.error("Erro ao preparar a consulta Migrantes: " + err.message);
@@ -78,7 +80,7 @@ const excluirMigrante = db.prepare(
 );
 // PUT y PATCH para migrantes
 const modificarMigrante = db.prepare(
-  `UPDATE Migrantes SET nombre = ?, pais = ?, habilidades = ?, email = ? WHERE id = ?`,
+  `UPDATE Migrantes SET nombre = ?, pais = ?, habilidades = ?, email = ?, cpf = ? WHERE id = ?`,
   (err) => {
     if (err) {
       console.error("Erro ao preparar update migrante: " + err.message);
@@ -98,7 +100,7 @@ const buscarEmpresas = (callback) => {
   });
 };
 const adicionarEmpresa = db.prepare(
-  `INSERT INTO Empresas (nombre, sector, contacto, ayuda) VALUES (?, ?, ?, ?)`,
+  `INSERT INTO Empresas (nombre, sector, contacto, ayuda, cnpj) VALUES (?, ?, ?, ?, ?)`,
   (err) => {
     if (err) {
       console.error("Erro ao preparar a consulta Empresas: " + err.message);
@@ -117,7 +119,7 @@ const excluirEmpresa = db.prepare(
 );
 // PUT y PATCH para empresas
 const modificarEmpresa = db.prepare(
-  `UPDATE Empresas SET nombre = ?, sector = ?, contacto = ?, ayuda = ? WHERE id = ?`,
+  `UPDATE Empresas SET nombre = ?, sector = ?, contacto = ?, ayuda = ?, cnpj = ? WHERE id = ?`,
   (err) => {
     if (err) {
       console.error("Erro ao preparar update empresa: " + err.message);
@@ -153,6 +155,7 @@ const server = http.createServer((req, res) => {
           parsedBody.pais,
           parsedBody.habilidades,
           parsedBody.email,
+          parsedBody.cpf,
           (err) => {
             if (err) {
               res.writeHead(500, { "Content-Type": "application/json" });
@@ -191,6 +194,7 @@ const server = http.createServer((req, res) => {
           if (parsedBody.pais !== undefined) { campos.push("pais = ?"); valores.push(parsedBody.pais); }
           if (parsedBody.habilidades !== undefined) { campos.push("habilidades = ?"); valores.push(parsedBody.habilidades); }
           if (parsedBody.email !== undefined) { campos.push("email = ?"); valores.push(parsedBody.email); }
+          if (parsedBody.cpf !== undefined) { campos.push("cpf = ?"); valores.push(parsedBody.cpf); }
           if (campos.length === 0) {
             res.writeHead(400, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ error: "No se enviaron campos para actualizar." }));
@@ -216,6 +220,7 @@ const server = http.createServer((req, res) => {
             parsedBody.pais,
             parsedBody.habilidades,
             parsedBody.email,
+            parsedBody.cpf,
             id,
             (err) => {
               if (err) {
@@ -264,6 +269,7 @@ const server = http.createServer((req, res) => {
           parsedBody.sector,
           parsedBody.contacto,
           parsedBody.ayuda,
+          parsedBody.cnpj,
           (err) => {
             if (err) {
               res.writeHead(500, { "Content-Type": "application/json" });
@@ -302,9 +308,10 @@ const server = http.createServer((req, res) => {
           if (parsedBody.sector !== undefined) { campos.push("sector = ?"); valores.push(parsedBody.sector); }
           if (parsedBody.contacto !== undefined) { campos.push("contacto = ?"); valores.push(parsedBody.contacto); }
           if (parsedBody.ayuda !== undefined) { campos.push("ayuda = ?"); valores.push(parsedBody.ayuda); }
+          if (parsedBody.cnpj !== undefined) { campos.push("cnpj = ?"); valores.push(parsedBody.cnpj); }
           if (campos.length === 0) {
             res.writeHead(400, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ error: "No se enviaron campos para actualizar." }));
+            res.end(JSON.stringify({ error: "No se enviaron campos para atualizar." }));
             return;
           }
           valores.push(id);
@@ -327,6 +334,7 @@ const server = http.createServer((req, res) => {
             parsedBody.sector,
             parsedBody.contacto,
             parsedBody.ayuda,
+            parsedBody.cnpj,
             id,
             (err) => {
               if (err) {

@@ -15,13 +15,13 @@ function App({ resultado, empresas, addMigrante, onDeleteMigrante, onDeleteEmpre
                     <div className="col-span-1 md:col-span-2 lg:col-span-4 flex flex-col justify-start bg-white/10 rounded-xl shadow-lg border border-white/20 p-4 backdrop-blur">
                         {migranteSearchInput && React.cloneElement(migranteSearchInput, {
                             className: (migranteSearchInput.props.className || '') + ' text-white placeholder-white',
-                            placeholder: 'Buscar migrante por nome, país ou habilidade...'
+                            placeholder: 'Buscar migrante por CPF...'
                         })}
                     </div>
                     {/* Fila 2: Form migrante y tabla migrantes */}
                     <div className="col-span-1 md:col-span-1 lg:col-span-2 flex flex-col justify-start bg-white/10 rounded-xl shadow-lg border border-white/20 p-4 pt-2 backdrop-blur">
                         <h2 className="text-lg font-bold mb-2 text-white title-animate">Cadastrar migrantes</h2>
-                        <FormMigrante addMigrante={addMigrante} />
+                        <FormMigrante addMigrante={addMigrante} migrantes={resultado} />
                     </div>
                     <div className="col-span-1 md:col-span-1 lg:col-span-2 flex flex-col justify-start bg-white/10 rounded-xl shadow-lg border border-white/20 p-4 pt-0 backdrop-blur">
                         {resultado && resultado.length > 0 ? (
@@ -34,13 +34,13 @@ function App({ resultado, empresas, addMigrante, onDeleteMigrante, onDeleteEmpre
                     <div className="col-span-1 md:col-span-2 lg:col-span-4 flex flex-col justify-start bg-white/10 rounded-xl shadow-lg border border-white/20 p-4 backdrop-blur">
                         {empresaSearchInput && React.cloneElement(empresaSearchInput, {
                             className: (empresaSearchInput.props.className || '') + ' text-white placeholder-white',
-                            placeholder: 'Buscar empresa por nombre, sector o ayuda...'
+                            placeholder: 'Buscar empresa por CNPJ...'
                         })}
                     </div>
                     {/* Fila 4: Form empresa y tabla empresas */}
                     <div className="col-span-1 md:col-span-1 lg:col-span-2 flex flex-col justify-start bg-white/10 rounded-xl shadow-lg border border-white/20 p-4 backdrop-blur">
                         <h2 className="text-lg font-bold mb-2 text-white title-animate">Cadastrar empresa</h2>
-                        <FormCompany addEmpresa={addEmpresa} />
+                        <FormCompany addEmpresa={addEmpresa} empresas={empresas} />
                     </div>
                     <div className="col-span-1 md:col-span-1 lg:col-span-2 flex flex-col justify-start bg-white/10 rounded-xl shadow-lg border border-white/20 p-4 pt-0 backdrop-blur">
                         {empresas && empresas.length > 0 ? (

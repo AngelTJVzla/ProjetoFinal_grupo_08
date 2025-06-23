@@ -3,24 +3,28 @@ import ModalEdit from "./ModalEdit";
 
 function ListOfMigrantes({ migrantes, onDelete, onEdit }) {
     const [editId, setEditId] = useState(null);
-    const [form, setForm] = useState({ nome: "", pais: "", habilidades: "", email: "" });
+    const [form, setForm] = useState({ cpf: "", nome: "", pais: "", habilidades: "", email: "" });
     const [modalOpen, setModalOpen] = useState(false);
     const [editError, setEditError] = useState("");
 
+    const onlyLetters = (str) => /^[A-ZÁÉÍÓÚÃÕÂÊÎÔÛÇ ]+$/i.test(str);
+    const onlyNumbers = (str) => /^\d{11}$/.test(str);
+
     const startEdit = (m) => {
         setEditId(m.id);
-        setForm({ nome: m.nombre, pais: m.pais, habilidades: m.habilidades, email: m.email });
+        setForm({ cpf: m.cpf || "", nome: m.nombre, pais: m.pais, habilidades: m.habilidades, email: m.email });
         setModalOpen(true);
     };
     const cancelEdit = () => {
         setEditId(null);
-        setForm({ nome: "", pais: "", habilidades: "", email: "" });
+        setForm({ cpf: "", nome: "", pais: "", habilidades: "", email: "" });
         setModalOpen(false);
     };
     const handleChange = (e) => {
         let value = e.target.value;
         if (["nome", "pais", "habilidades"].includes(e.target.name)) {
-            value = value.toUpperCase();
+            // Solo permitir letras y espacios, pero NO modificar el casing aquí
+            value = value.replace(/[^A-Za-zÁÉÍÓÚÃÕÂÊÎÔÛÇáéíóúãõâêîôûç ]/g, "");
         }
         setForm({ ...form, [e.target.name]: value });
     };
@@ -29,11 +33,20 @@ function ListOfMigrantes({ migrantes, onDelete, onEdit }) {
             setEditError("O nome deve conter pelo menos nome e sobrenome.");
             return;
         }
+        if (!onlyLetters(form.nome) || !onlyLetters(form.pais) || !onlyLetters(form.habilidades)) {
+            setEditError("Nome, país e habilidades devem conter apenas letras e espaços.");
+            return;
+        }
+        if (!onlyNumbers(form.cpf)) {
+            setEditError("CPF deve conter exatamente 11 números.");
+            return;
+        }
         setEditError("");
         if (onEdit) onEdit(editId, {
-            nombre: form.nome, // backend espera 'nombre'
-            pais: form.pais,
-            habilidades: form.habilidades,
+            cpf: form.cpf,
+            nombre: form.nome.toUpperCase(), // backend espera 'nombre' en mayúsculas
+            pais: form.pais.toUpperCase(),
+            habilidades: form.habilidades.toUpperCase(),
             email: form.email
         });
         cancelEdit();
@@ -46,6 +59,7 @@ function ListOfMigrantes({ migrantes, onDelete, onEdit }) {
                 <table className="min-w-full bg-white rounded-lg shadow text-sm md:text-base">
                     <thead>
                         <tr>
+                            <th className="px-4 py-2 border-b">CPF</th>
                             <th className="px-4 py-2 border-b">Nome</th>
                             <th className="px-4 py-2 border-b">País</th>
                             <th className="px-4 py-2 border-b">Habilidades</th>
@@ -56,12 +70,13 @@ function ListOfMigrantes({ migrantes, onDelete, onEdit }) {
                     <tbody>
                         {migrantes.length === 0 ? (
                             <tr>
-                                <td colSpan="5" className="text-center text-gray-500 py-4">Ainda não há migrantes registrados.</td>
+                                <td colSpan="6" className="text-center text-gray-500 py-4">Ainda não há migrantes registrados.</td>
                             </tr>
                         ) : (
                             migrantes.map((m, idx) => (
                                 <tr key={m.id || idx} className="border-b">
                                     <>
+                                        <td className="px-2 py-1 font-mono text-purple-700">{m.cpf || ""}</td>
                                         <td className="px-2 py-1 font-semibold text-blue-700">{m.nombre}</td>
                                         <td className="px-2 py-1 text-gray-700 text-opacity-60">{m.pais}</td>
                                         <td className="px-2 py-1 text-gray-700 text-opacity-60">{m.habilidades}</td>
@@ -91,6 +106,7 @@ function ListOfMigrantes({ migrantes, onDelete, onEdit }) {
             </div>
             <ModalEdit open={modalOpen} title="Editar migrante" onClose={cancelEdit}>
                 <form className="flex flex-col gap-3">
+                    <input className="border p-2 rounded" name="cpf" value={form.cpf} onChange={handleChange} placeholder="CPF (11 números)" maxLength={11} pattern="\d{11}" />
                     <input className="border p-2 rounded" name="nome" value={form.nome} onChange={handleChange} placeholder="Nome completo" />
                     <input className="border p-2 rounded bg-gray-100 cursor-not-allowed" name="pais" value={form.pais} placeholder="País de origem" readOnly tabIndex={-1} />
                     <input className="border p-2 rounded" name="habilidades" value={form.habilidades} onChange={handleChange} placeholder="Habilidades ou profissão" />

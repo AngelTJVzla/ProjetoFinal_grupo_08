@@ -15,6 +15,10 @@ function Main() {
     const [empresas, setEmpresas] = useState([]);
     const [busqueda, setBusqueda] = useState("");
     const [busquedaEmp, setBusquedaEmp] = useState("");
+    // Estado para mostrar alerta si se ingresan letras en el buscador de migrantes
+    const [alertaBusqueda, setAlertaBusqueda] = useState("");
+    // Estado para mostrar alerta si se ingresan letras en el buscador de empresas
+    const [alertaBusquedaEmp, setAlertaBusquedaEmp] = useState("");
 
     // Fetch real para migrantes desde el backend
     const fetchMigrantes = async () => {
@@ -138,26 +142,58 @@ function Main() {
         e.ayuda.toLowerCase().includes(busquedaEmp.toLowerCase())
     );
 
-    // Input controlado para buscar migrante
+    // Input controlado para buscar migrante SOLO CPF (11 números)
     const migranteSearchInput = (
-        <input
-            className="form-input w-full p-3 border-2 border-blue-400 rounded-lg focus:border-blue-700 focus:outline-none"
-            type="text"
-            value={busqueda}
-            onChange={e => setBusqueda(e.target.value)}
-            placeholder="Buscar migrante por nome, país ou habilidade..."
-        />
+        <>
+            <input
+                className="form-input w-full p-3 border-2 border-blue-400 rounded-lg focus:border-blue-700 focus:outline-none"
+                type="text"
+                value={busqueda}
+                onChange={e => {
+                    const original = e.target.value;
+                    const val = original.replace(/\D/g, "").slice(0, 11);
+                    setBusqueda(val);
+                    if (original && /[^\d]/.test(original)) {
+                        setAlertaBusqueda("Solo se permiten números (CPF)");
+                        setTimeout(() => setAlertaBusqueda(""), 2000);
+                    }
+                }}
+                placeholder="Buscar migrante por CPF..."
+                maxLength={11}
+                inputMode="numeric"
+                pattern="\d{11}"
+            />
+            {alertaBusqueda && (
+                <div className="text-red-600 text-sm mt-1 font-semibold animate-pulse">{alertaBusqueda}</div>
+            )}
+        </>
     );
 
-    // Input controlado para buscar empresa
+    // Input controlado para buscar empresa SOLO CNPJ (14 números)
     const empresaSearchInput = (
-        <input
-            className="form-input w-full p-3 border-2 border-blue-400 rounded-lg focus:border-blue-700 focus:outline-none"
-            type="text"
-            value={busquedaEmp}
-            onChange={e => setBusquedaEmp(e.target.value)}
-            placeholder="Buscar empresa por nombre, sector o ayuda..."
-        />
+        <>
+            <input
+                className="form-input w-full p-3 border-2 border-blue-400 rounded-lg focus:border-blue-700 focus:outline-none"
+                type="text"
+                value={busquedaEmp}
+                onChange={e => {
+                    const original = e.target.value;
+                    const val = original.replace(/\D/g, "").slice(0, 14);
+                    setBusquedaEmp(val);
+                    if (original && /[^\d]/.test(original)) {
+                        setAlertaBusquedaEmp("Solo se permiten números (CNPJ)");
+                        setTimeout(() => setAlertaBusquedaEmp(""), 2000);
+                    }
+                }}
+                placeholder="Buscar empresa por CNPJ..."
+                maxLength={14}
+                inputMode="numeric"
+                pattern="\d{14}"
+            />
+            {alertaBusquedaEmp && (
+                <div className="text-red-600 text-sm mt-1 font-semibold animate-pulse">{alertaBusquedaEmp}</div>
+            )}
+        </>
     );
 
     return (

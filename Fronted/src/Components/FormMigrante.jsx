@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 
-function FormMigrante({ addMigrante }) {
+function FormMigrante({ addMigrante, migrantes }) {
     const [form, setForm] = useState({
         nome: "",
         pais: "",
         habilidades: "",
-        email: ""
+        email: "",
+        cpf: ""
     });
     const [error, setError] = useState("");
 
     const onlyLetters = (str) => /^[A-ZÁÉÍÓÚÃÕÂÊÎÔÛÇ ]+$/i.test(str);
+    const onlyNumbers = (str) => /^\d{11}$/.test(str);
 
     const handleChange = (e) => {
         let value = e.target.value;
@@ -40,19 +42,29 @@ function FormMigrante({ addMigrante }) {
             setError("Nome, país e habilidades devem conter apenas letras e espaços.");
             return;
         }
+        if (!onlyNumbers(form.cpf)) {
+            setError("CPF deve conter exatamente 11 números.");
+            return;
+        }
+        // Verificar si el CPF ya está registrado (comparar con todos los migrantes, no solo filtrados)
+        if (migrantes && migrantes.some(m => m.cpf === form.cpf)) {
+            setError("Este CPF já está cadastrado.");
+            return;
+        }
         addMigrante({
             nombre: form.nome, // backend espera 'nombre'
             pais: form.pais,
             habilidades: form.habilidades,
-            email: form.email
+            email: form.email,
+            cpf: form.cpf
         });
-        setForm({ nome: "", pais: "", habilidades: "", email: "" });
+        setForm({ nome: "", pais: "", habilidades: "", email: "", cpf: "" });
         setError("");
     };
 
     return (
         <form onSubmit={handleSubmit} className="bg-white p-4 rounded-lg shadow mb-6 border border-amber-200">
-            
+            <input className="form-input mb-2 p-2 border rounded w-full" name="cpf" value={form.cpf} onChange={handleChange} placeholder="CPF (11 números)" required maxLength={11} pattern="\d{11}" />
             <input className="form-input mb-2 p-2 border rounded w-full" name="nome" value={form.nome} onChange={handleChange} placeholder="Nome completo" required />
             <select className="form-input mb-2 p-2 border rounded w-full font-normal text-gray-700" name="pais" value={form.pais} onChange={handleChange} required>
                 <option value="" disabled hidden>Selecione o país de origem</option>
