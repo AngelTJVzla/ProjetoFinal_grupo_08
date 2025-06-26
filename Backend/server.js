@@ -158,11 +158,20 @@ const server = http.createServer((req, res) => {
           parsedBody.cpf,
           (err) => {
             if (err) {
+              console.error("Erro ao adicionar migrante:", err.message, parsedBody); // LOG DETALLADO
               res.writeHead(500, { "Content-Type": "application/json" });
               res.end(JSON.stringify({ error: "Erro ao adicionar migrante: " + err.message }));
             } else {
-              res.writeHead(200, { "Content-Type": "application/json" });
-              res.end(JSON.stringify({ message: "Migrante salvo com sucesso!" }));
+              // Después de guardar, retornar el migrante insertado
+              db.get('SELECT * FROM Migrantes WHERE rowid = last_insert_rowid()', [], (err2, row) => {
+                if (err2) {
+                  res.writeHead(200, { "Content-Type": "application/json" });
+                  res.end(JSON.stringify({ message: "Migrante salvo com sucesso!", warning: "No se pudo retornar el migrante insertado." }));
+                } else {
+                  res.writeHead(200, { "Content-Type": "application/json" });
+                  res.end(JSON.stringify({ message: "Migrante salvo com sucesso!", migrante: row }));
+                }
+              });
             }
           }
         );
@@ -272,11 +281,20 @@ const server = http.createServer((req, res) => {
           parsedBody.cnpj,
           (err) => {
             if (err) {
+              console.error("Erro ao adicionar empresa:", err.message, parsedBody); // LOG DETALLADO
               res.writeHead(500, { "Content-Type": "application/json" });
               res.end(JSON.stringify({ error: "Erro ao adicionar empresa: " + err.message }));
             } else {
-              res.writeHead(200, { "Content-Type": "application/json" });
-              res.end(JSON.stringify({ message: "Empresa salva com sucesso!" }));
+              // Después de guardar, retornar la empresa insertada
+              db.get('SELECT * FROM Empresas WHERE rowid = last_insert_rowid()', [], (err2, row) => {
+                if (err2) {
+                  res.writeHead(200, { "Content-Type": "application/json" });
+                  res.end(JSON.stringify({ message: "Empresa salva com sucesso!", warning: "No se pudo retornar la empresa insertada." }));
+                } else {
+                  res.writeHead(200, { "Content-Type": "application/json" });
+                  res.end(JSON.stringify({ message: "Empresa salva com sucesso!", empresa: row }));
+                }
+              });
             }
           }
         );
@@ -361,6 +379,17 @@ const server = http.createServer((req, res) => {
       res.writeHead(405, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ error: "Método não permitido." }));
     }
+  } else if (req.url === '/limpiar-empresas-sin-cnpj' && req.method === 'GET') {
+    // Ruta temporal para limpiar empresas sin CNPJ
+    db.run("DELETE FROM Empresas WHERE cnpj IS NULL OR cnpj = ''", [], function(err) {
+      if (err) {
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: 'Erro ao limpar empresas: ' + err.message }));
+      } else {
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ message: 'Empresas sem CNPJ removidas com sucesso!', changes: this.changes }));
+      }
+    });
   } else {
     res.writeHead(404, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ error: "Ruta no encontrada." }));

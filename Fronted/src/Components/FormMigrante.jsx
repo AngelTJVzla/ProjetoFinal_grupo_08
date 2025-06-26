@@ -30,7 +30,7 @@ function FormMigrante({ addMigrante, migrantes }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!validateEmail(form.email)) {
+        if (!validateEmail(form.email.trim())) {
             setError("Por favor, insira um e-mail válido.");
             return;
         }
@@ -55,7 +55,7 @@ function FormMigrante({ addMigrante, migrantes }) {
             nombre: form.nome, // backend espera 'nombre'
             pais: form.pais,
             habilidades: form.habilidades,
-            email: form.email,
+            email: form.email.trim(),
             cpf: form.cpf
         });
         setForm({ nome: "", pais: "", habilidades: "", email: "", cpf: "" });
@@ -65,6 +65,10 @@ function FormMigrante({ addMigrante, migrantes }) {
     return (
         <form onSubmit={handleSubmit} className="bg-white p-4 rounded-lg shadow mb-6 border border-amber-200">
             <input className="form-input mb-2 p-2 border rounded w-full" name="cpf" value={form.cpf} onChange={handleChange} placeholder="CPF (11 números)" required maxLength={11} pattern="\d{11}" />
+            {/* Mensaje visual si el CPF ya está registrado */}
+            {form.cpf.length === 11 && migrantes && migrantes.some(m => m.cpf === form.cpf) && (
+                <div className="text-yellow-600 text-sm mb-2 font-semibold animate-pulse">CPF já cadastrado</div>
+            )}
             <input className="form-input mb-2 p-2 border rounded w-full" name="nome" value={form.nome} onChange={handleChange} placeholder="Nome completo" required />
             <select className="form-input mb-2 p-2 border rounded w-full font-normal text-gray-700" name="pais" value={form.pais} onChange={handleChange} required>
                 <option value="" disabled hidden>Selecione o país de origem</option>

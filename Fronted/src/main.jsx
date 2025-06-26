@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-import FormCompany from "./Components/FormCompany";
-import Footer from  "./Components/Footer" // Asegúrate de importar el Footer
+import MainRoutes from "./Routes";
 import "./Styles/app.css";
+import { ErrorBoundary } from "./Components/ErrorBoundary";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -19,6 +18,7 @@ function Main() {
     const [alertaBusqueda, setAlertaBusqueda] = useState("");
     // Estado para mostrar alerta si se ingresan letras en el buscador de empresas
     const [alertaBusquedaEmp, setAlertaBusquedaEmp] = useState("");
+    const [isLogged, setIsLogged] = useState(false);
 
     // Fetch real para migrantes desde el backend
     const fetchMigrantes = async () => {
@@ -158,6 +158,7 @@ function Main() {
                         setTimeout(() => setAlertaBusqueda(""), 2000);
                     }
                 }}
+                onBlur={() => setBusqueda("")}
                 placeholder="Buscar migrante por CPF..."
                 maxLength={11}
                 inputMode="numeric"
@@ -165,6 +166,13 @@ function Main() {
             />
             {alertaBusqueda && (
                 <div className="text-red-600 text-sm mt-1 font-semibold animate-pulse">{alertaBusqueda}</div>
+            )}
+            {/* Mensaje si el CPF está registrado */}
+            {busqueda.length === 11 && migrantes.some(m => m.cpf === busqueda) && (
+                <div className="text-green-600 text-sm mt-1 font-semibold animate-pulse">CPF cadastrado ✔️</div>
+            )}
+            {busqueda.length === 11 && !migrantes.some(m => m.cpf === busqueda) && (
+                <div className="text-yellow-600 text-sm mt-1 font-semibold animate-pulse">CPF não cadastrado</div>
             )}
         </>
     );
@@ -185,6 +193,7 @@ function Main() {
                         setTimeout(() => setAlertaBusquedaEmp(""), 2000);
                     }
                 }}
+                onBlur={() => setBusquedaEmp("")}
                 placeholder="Buscar empresa por CNPJ..."
                 maxLength={14}
                 inputMode="numeric"
@@ -193,32 +202,91 @@ function Main() {
             {alertaBusquedaEmp && (
                 <div className="text-red-600 text-sm mt-1 font-semibold animate-pulse">{alertaBusquedaEmp}</div>
             )}
+            {/* Mensaje si el CNPJ está registrado */}
+            {busquedaEmp.length === 14 && empresas.some(e => e.cnpj === busquedaEmp) && (
+                <div className="text-green-600 text-sm mt-1 font-semibold animate-pulse">CNPJ cadastrado ✔️</div>
+            )}
+            {busquedaEmp.length === 14 && !empresas.some(e => e.cnpj === busquedaEmp) && (
+                <div className="text-yellow-600 text-sm mt-1 font-semibold animate-pulse">CNPJ não cadastrado</div>
+            )}
         </>
     );
 
+    // Login y logout
+    const onLogin = () => {
+        setIsLogged(true);
+        // Navegación ahora se hace en PresentationLogin.jsx
+    };
+    const onLogout = () => {
+        setIsLogged(false);
+        // Navegación ahora se hace en PresentationLogin.jsx
+    };
+
+    if (!isLogged) {
+        return <MainRoutes {...{
+            migrantes,
+            setMigrantes,
+            empresas,
+            setEmpresas,
+            busqueda,
+            setBusqueda,
+            busquedaEmp,
+            setBusquedaEmp,
+            alertaBusqueda,
+            setAlertaBusqueda,
+            alertaBusquedaEmp,
+            setAlertaBusquedaEmp,
+            addMigrante,
+            addEmpresa,
+            onDeleteMigrante,
+            onDeleteEmpresa,
+            updateMigrante,
+            updateEmpresa,
+            migrantesFiltrados,
+            empresasFiltradas,
+            migranteSearchInput,
+            empresaSearchInput,
+            onLogin
+        }} />;
+    }
+
     return (
-        <>
-            <App
-                resultado={migrantesFiltrados}
-                empresas={empresasFiltradas}
-                addMigrante={addMigrante}
-                onDeleteMigrante={onDeleteMigrante}
-                onDeleteEmpresa={onDeleteEmpresa}
-                updateMigrante={updateMigrante}
-                updateEmpresa={updateEmpresa}
-                migranteSearchInput={migranteSearchInput}
-                empresaSearchInput={empresaSearchInput}
-                addEmpresa={addEmpresa}
-            />
-            <Footer />
-        </>
+        <MainRoutes
+            migrantes={migrantes}
+            setMigrantes={setMigrantes}
+            empresas={empresas}
+            setEmpresas={setEmpresas}
+            busqueda={busqueda}
+            setBusqueda={setBusqueda}
+            busquedaEmp={busquedaEmp}
+            setBusquedaEmp={setBusquedaEmp}
+            alertaBusqueda={alertaBusqueda}
+            setAlertaBusqueda={setAlertaBusqueda}
+            alertaBusquedaEmp={alertaBusquedaEmp}
+            setAlertaBusquedaEmp={setAlertaBusquedaEmp}
+            addMigrante={addMigrante}
+            addEmpresa={addEmpresa}
+            onDeleteMigrante={onDeleteMigrante}
+            onDeleteEmpresa={onDeleteEmpresa}
+            updateMigrante={updateMigrante}
+            updateEmpresa={updateEmpresa}
+            migrantesFiltrados={migrantesFiltrados}
+            empresasFiltradas={empresasFiltradas}
+            migranteSearchInput={migranteSearchInput}
+            empresaSearchInput={empresaSearchInput}
+            onLogin={onLogin}
+            onLogout={onLogout}
+            isLogged={isLogged}
+        />
     );
 }
 
 root.render(
+  <ErrorBoundary>
     <BrowserRouter>
-        <Main />
+      <Main />
     </BrowserRouter>
+  </ErrorBoundary>
 );
 
 export default Main;
