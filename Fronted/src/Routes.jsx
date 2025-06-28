@@ -3,6 +3,7 @@ import App from "./App";
 import EmpresasPage from "./Pages/EmpresasPage";
 import MigrantesPage from "./Pages/MigrantesPage";
 import PresentationLogin from "./Pages/PresentationLogin";
+import HomePage from "./Pages/HomePage";
 import { Routes, Route } from "react-router-dom";
 
 export default function MainRoutes(props) {
@@ -33,7 +34,7 @@ export default function MainRoutes(props) {
         path="/app"
         element={<App {...props} onLogout={props.onLogout} />}
       />
-      <Route path="/" element={<App {...props} onLogout={props.onLogout} />} />
+      <Route path="/" element={<HomePage />} />
     </Routes>
   );
 }
