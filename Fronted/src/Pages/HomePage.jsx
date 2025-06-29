@@ -92,7 +92,7 @@ function HomePage() {
                 <h3 className="font-bold text-[#002eff] mb-3 font-circe italic">
                   👥 Migrantes precisam de:
                 </h3>
-                <ul className="text-[#1a4fff] space-y-2 font-circe font-medium">
+                <ul className="text-white space-y-2 font-circe font-medium">
                   <li>• Oportunidades de trabalho no Brasil.</li>
                   <li>• Empresas que valorizem sua experiência.</li>
                   <li>• Processos justos de contratação.</li>
@@ -103,7 +103,7 @@ function HomePage() {
                 <h3 className="font-bold text-[#002eff] mb-3 font-circe italic">
                   🏢 Empresas precisam de:
                 </h3>
-                <ul className="text-[#1a4fff] space-y-2 font-circe font-medium">
+                <ul className="text-white space-y-2 font-circe font-medium">
                   <li>• Talentos qualificados e diversos.</li>
                   <li>• Profissionais com perspectivas globais.</li>
                   <li>• Equipes multiculturais.</li>
@@ -148,10 +148,10 @@ function HomePage() {
                     <h4 className="text-neutral-700 font-bold text-lg mb-2">
                       📝 Cadastro Completo
                     </h4>
-                    <p className="text-neutral-700 mb-2">
+                    <p className="text-white mb-2">
                       Preencha informações pessoais, profissionais e habilidades
                     </p>
-                    <ul className="text-sm text-neutral-700 list-disc list-inside">
+                    <ul className="text-sm text-white list-disc list-inside">
                       <li>Dados pessoais e de contato</li>
                       <li>Experiência profissional anterior</li>
                       <li>Formação acadêmica</li>
@@ -167,11 +167,11 @@ function HomePage() {
                     <h4 className="text-neutral-700 font-bold text-lg mb-2">
                       🔍 Busca e Match
                     </h4>
-                    <p className="text-neutral-700 mb-2">
+                    <p className="text-white mb-2">
                       Nossa plataforma encontra empresas compatíveis com seu
                       perfil
                     </p>
-                    <ul className="text-sm  text-neutral-700 list-disc list-inside">
+                    <ul className="text-sm  text-white list-disc list-inside">
                       <li>Empresas do seu setor de atuação</li>
                       <li>Vagas compatíveis com sua experiência</li>
                       <li>Organizações inclusivas e diversas</li>
@@ -186,10 +186,10 @@ function HomePage() {
                     <h4 className="text-neutral-700 font-bold text-lg mb-2">
                       🤝 Conexão e Contratação
                     </h4>
-                    <p className="text-neutral-700 mb-2">
+                    <p className="text-white mb-2">
                       Conecte-se diretamente com empresas interessadas
                     </p>
-                    <ul className="text-sm text-neutral-700 list-disc list-inside">
+                    <ul className="text-sm text-white list-disc list-inside">
                       <li>Contato direto com recrutadores</li>
                       <li>Entrevistas personalizadas</li>
                       <li>Suporte durante o processo</li>
@@ -227,10 +227,10 @@ function HomePage() {
                     <h4 className="text-neutral-700 font-bold text-lg mb-2">
                       🏢 Registro da Empresa
                     </h4>
-                    <p className="text-neutral-700 mb-2">
+                    <p className="text-white mb-2">
                       Cadastre sua empresa e defina o que podem oferecer
                     </p>
-                    <ul className="text-sm text-neutral-700 list-disc list-inside">
+                    <ul className="text-sm text-white list-disc list-inside">
                       <li>CNPJ e dados da empresa</li>
                       <li>Setor de atuação</li>
                       <li>Tipos de ajuda oferecida</li>
@@ -246,10 +246,10 @@ function HomePage() {
                     <h4 className="text-neutral-700 font-bold text-lg mb-2">
                       🎯 Acesso ao Banco de Talentos
                     </h4>
-                    <p className="text-neutral-700 mb-2">
+                    <p className="text-white mb-2">
                       Visualize perfis de migrantes qualificados
                     </p>
-                    <ul className="text-sm text-neutral-700 list-disc list-inside">
+                    <ul className="text-sm text-white list-disc list-inside">
                       <li>Filtros por experiência e setor</li>
                       <li>Perfis detalhados dos candidatos</li>
                       <li>Histórico profissional completo</li>
@@ -264,10 +264,10 @@ function HomePage() {
                     <h4 className="text-neutral-700 font-bold text-lg mb-2">
                       📞 Contato e Contratação
                     </h4>
-                    <p className="text-neutral-700 mb-2">
+                    <p className="text-white mb-2">
                       Entre em contato com candidatos interessantes
                     </p>
-                    <ul className="text-sm text-neutral-700 list-disc list-inside">
+                    <ul className="text-sm text-white list-disc list-inside">
                       <li>Sistema de mensagens integrado</li>
                       <li>Agendamento de entrevistas</li>
                       <li>Acompanhamento do processo</li>
@@ -278,7 +278,7 @@ function HomePage() {
 
               <Link
                 to="/cadastro-empresas"
-                className="block w-full bg-gradient-to-r from-[#002eff] to-[#0031ff] text-[#8ceb3e] font-bold text-lg py-4 px-8 rounded-2xl mt-8 text-center hover:from-[#7192f3] hover:to-[#274bea] hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              className="block w-full bg-gradient-to-r from-[#002eff] to-[#0031ff] text-[#8ceb3e] font-bold text-lg py-4 px-8 rounded-2xl mt-8 text-center hover:from-[#7192f3] hover:to-[#274bea] hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 Cadastrar Empresa 💎
               </Link>
@@ -509,8 +509,8 @@ function HomePage() {
             </h3>
             <div className="text-blue-100 space-y-2 font-medium">
               <p>1️⃣ Escolha seu perfil (Migrante ou Empresa)</p>
-              <p>2️⃣ Preencha o cadastro completo (5-10 minutos)</p>
-              <p>3️⃣ Aguarde as primeiras conexões (1-7 dias)</p>
+              <p>2️⃣ Preencha o cadastro completo (1-3 minutos)</p>
+              <p>3️⃣ Aguarde as primeiras conexões (1-14 dias)</p>
               <p>4️⃣ Inicie conversas e realize entrevistas</p>
             </div>
           </div>
