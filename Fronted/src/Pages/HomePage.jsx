@@ -29,7 +29,7 @@ function HomePage() {
                 />
               </div>
               <div className="flex-1 text-center lg:text-left">
-                <p className="text-lg md:text-2xl lg:text-3xl font-light text-blue-100 leading-relaxed">
+                <p className="text-lg md:text-2xl lg:text-3xl font-light text-white  leading-relaxed">
                   A primeira plataforma brasileira que conecta{" "}
                   <span className="font-bold text-white">migrantes talentosos</span>{" "}
                   com{" "}
@@ -545,37 +545,37 @@ function HomePage() {
       </div>
 
       {/* Enhanced Footer */}
-      <footer className="bg-[#0031ff] text-white py-16">
-        <div className="container mx-auto px-6">
+      <footer className="bg-[#0031ff] text-white py-5">
+        <div className="container mx-auto px-2">
           <div className="text-center">
             <div className="flex justify-center mb-6">
               <img 
                 src={logo}
                 alt="Esboço Alóctone"
-                className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-lg"
+                className="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-lg"
               />
             </div>
-            <p className="text-blue-200 text-lg mb-8 max-w-2xl mx-auto font-medium">
+            <p className="text-white text-lg mb-8 max-w-2xl mx-auto font-medium">
               🌍 Conectando culturas • 💼 Criando oportunidades • 🚀 Construindo
               o futuro
             </p>
             <div className="grid md:grid-cols-3 gap-8 mb-8 max-w-4xl mx-auto">
               <div>
-                <h4 className="font-bold text-[#78b3ff] mb-2">📧 Contato</h4>
+                <h4 className="font-bold text-white mb-2">📧 Contato</h4>
                 <p className="text-blue-100">contato@esboco-aloctone.com.br</p>
               </div>
               <div>
-                <h4 className="font-bold text-[#78b3ff] mb-2">📱 Suporte</h4>
-                <p className="text-blue-100">+55 (11) 9999-9999</p>
+                <h4 className="font-bold text-white mb-2">📱 Suporte</h4>
+                <p className="text-white">+55 (11) 9999-9999</p>
               </div>
               <div>
-                <h4 className="font-bold text-[#78b3ff] mb-2">
+                <h4 className="font-bold text-white mb-2">
                   🌐 Redes Sociais
                 </h4>
                 <p className="text-blue-100">@esboco_aloctone</p>
               </div>
             </div>
-            <div className="text-sm text-blue-200 border-t border-[#4480ff] pt-8 font-medium">
+            <div className="text-sm text-white border-t border-[#4480ff] pt-8 font-medium">
               © 2025 Esboço Alóctone. Transformando vidas através da tecnologia
               e diversidade cultural. 🇧🇷
             </div>

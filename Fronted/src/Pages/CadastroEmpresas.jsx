@@ -1,30 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import FormCompany from "../Components/FormCompany";
-import logo from "../assets/logo.png";
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 
 function CadastroEmpresas({ addEmpresa, empresas }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#78b3ff]/10 via-white to-[#4480ff]/10">
       {/* Header */}
-      <header className="bg-gradient-to-r from-[#78b3ff] to-[#4480ff] shadow-xl">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-3">
-            <img 
-              src={logo}
-              alt="Esboço Alóctone"
-              className="w-12 h-12 object-contain drop-shadow-lg"
-            />
-            <span className="text-white text-xl font-bold">Esboço Alóctone</span>
-          </Link>
-          <Link 
-            to="/" 
-            className="text-white hover:text-blue-200 transition-colors duration-300 font-medium"
-          >
-            ← Voltar ao início
-          </Link>
-        </div>
-      </header>
+      <Header />
 
       {/* Main Content */}
       <div className="container mx-auto px-6 py-12">
@@ -120,6 +104,9 @@ function CadastroEmpresas({ addEmpresa, empresas }) {
           </div>
         </div>
       </div>
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

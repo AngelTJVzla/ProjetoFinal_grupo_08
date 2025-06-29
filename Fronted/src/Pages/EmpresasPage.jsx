@@ -5,15 +5,17 @@ import Footer from "../Components/Footer";
 
 function EmpresasPage({ empresas, onDeleteEmpresa, updateEmpresa }) {
     return (
-        <>
+        <div className="min-h-screen flex flex-col">
             <Header />
-            <AllEmpresas 
-                empresas={empresas} 
-                onDelete={onDeleteEmpresa} 
-                onEdit={updateEmpresa} 
-            />
+            <div className="flex-grow">
+                <AllEmpresas 
+                    empresas={empresas} 
+                    onDelete={onDeleteEmpresa} 
+                    onEdit={updateEmpresa} 
+                />
+            </div>
             <Footer />
-        </>
+        </div>
     );
 }
 

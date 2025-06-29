@@ -1,18 +1,14 @@
 import React from "react";
-import App from "./App";
 import EmpresasPage from "./Pages/EmpresasPage";
 import MigrantesPage from "./Pages/MigrantesPage";
-import PresentationLogin from "./Pages/PresentationLogin";
 import HomePage from "./Pages/HomePage";
 import CadastroMigrantes from "./Pages/CadastroMigrantes";
 import CadastroEmpresas from "./Pages/CadastroEmpresas";
-import DebugPage from "./Pages/DebugPage";
 import { Routes, Route } from "react-router-dom";
 
 export default function MainRoutes(props) {
   return (
     <Routes>
-      <Route path="/Login" element={<PresentationLogin onLogin={props.onLogin} />} />
       <Route
         path="/migrantes"
         element={
@@ -33,10 +29,6 @@ export default function MainRoutes(props) {
           />
         }
       />
-      <Route
-        path="/app"
-        element={<App {...props} onLogout={props.onLogout} />}
-      />
       <Route 
         path="/cadastro-migrantes" 
         element={
@@ -52,15 +44,6 @@ export default function MainRoutes(props) {
           <CadastroEmpresas 
             addEmpresa={props.addEmpresa} 
             empresas={props.empresas} 
-          />
-        } 
-      />
-      <Route 
-        path="/debug" 
-        element={
-          <DebugPage 
-            empresas={props.empresas} 
-            addEmpresa={props.addEmpresa} 
           />
         } 
       />

@@ -5,15 +5,17 @@ import Footer from "../Components/Footer";
 
 function MigrantesPage({ migrantes, onDeleteMigrante, updateMigrante }) {
     return (
-        <>
+        <div className="min-h-screen flex flex-col">
             <Header />
-            <AllMigrantes 
-                migrantes={migrantes} 
-                onDelete={onDeleteMigrante} 
-                onEdit={updateMigrante} 
-            />
+            <div className="flex-grow">
+                <AllMigrantes 
+                    migrantes={migrantes} 
+                    onDelete={onDeleteMigrante} 
+                    onEdit={updateMigrante} 
+                />
+            </div>
             <Footer />
-        </>
+        </div>
     );
 }
 
