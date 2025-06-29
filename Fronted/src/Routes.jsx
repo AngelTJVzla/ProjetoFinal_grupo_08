@@ -3,6 +3,9 @@ import App from "./App";
 import EmpresasPage from "./Pages/EmpresasPage";
 import MigrantesPage from "./Pages/MigrantesPage";
 import PresentationLogin from "./Pages/PresentationLogin";
+import HomePage from "./Pages/HomePage";
+import CadastroMigrantes from "./Pages/CadastroMigrantes";
+import CadastroEmpresas from "./Pages/CadastroEmpresas";
 import { Routes, Route } from "react-router-dom";
 
 export default function MainRoutes(props) {
@@ -33,7 +36,25 @@ export default function MainRoutes(props) {
         path="/app"
         element={<App {...props} onLogout={props.onLogout} />}
       />
-      <Route path="/" element={<App {...props} onLogout={props.onLogout} />} />
+      <Route 
+        path="/cadastro-migrantes" 
+        element={
+          <CadastroMigrantes 
+            addMigrante={props.addMigrante} 
+            migrantes={props.migrantes} 
+          />
+        } 
+      />
+      <Route 
+        path="/cadastro-empresas" 
+        element={
+          <CadastroEmpresas 
+            addEmpresa={props.addEmpresa} 
+            empresas={props.empresas} 
+          />
+        } 
+      />
+      <Route path="/" element={<HomePage />} />
     </Routes>
   );
 }
