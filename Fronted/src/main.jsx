@@ -18,7 +18,7 @@ function Main() {
     const [alertaBusqueda, setAlertaBusqueda] = useState("");
     // Estado para mostrar alerta si se ingresan letras en el buscador de empresas
     const [alertaBusquedaEmp, setAlertaBusquedaEmp] = useState("");
-    const [isLogged, setIsLogged] = useState(false);
+    const [isLogged, setIsLogged] = useState(true); // Cambiar a true para depuración
 
     // Fetch real para migrantes desde el backend
     const fetchMigrantes = async () => {

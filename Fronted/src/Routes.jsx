@@ -6,6 +6,7 @@ import PresentationLogin from "./Pages/PresentationLogin";
 import HomePage from "./Pages/HomePage";
 import CadastroMigrantes from "./Pages/CadastroMigrantes";
 import CadastroEmpresas from "./Pages/CadastroEmpresas";
+import DebugPage from "./Pages/DebugPage";
 import { Routes, Route } from "react-router-dom";
 
 export default function MainRoutes(props) {
@@ -51,6 +52,15 @@ export default function MainRoutes(props) {
           <CadastroEmpresas 
             addEmpresa={props.addEmpresa} 
             empresas={props.empresas} 
+          />
+        } 
+      />
+      <Route 
+        path="/debug" 
+        element={
+          <DebugPage 
+            empresas={props.empresas} 
+            addEmpresa={props.addEmpresa} 
           />
         } 
       />
