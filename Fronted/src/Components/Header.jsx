@@ -1,18 +1,11 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
 
 function Header({ onLogout }) {
     return (
         <>
-            <header className="bg-gradient-to-r from-[#78b3ff] via-[#4480ff] to-[#1a4fff] text-white p-4 shadow-xl border-b-2 border-[#002eff]/30 flex items-center justify-between">
-                <div className="flex items-center">
-                    <Link to="/" className="flex items-center hover:opacity-90 transition-opacity">
-                        <img 
-                            src={logo}
-                            alt="Esboço Alóctone"
-                            className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-lg"
-                        />
-                    </Link>
+            <header className="bg-blue-700/60 text-white p-4 shadow-md border-b border-white/20 backdrop-blur-md flex items-center justify-between">
+                <div className="text-center text-sm md:text-base font-semibold tracking-wide mb-2 text-blue-100/90 drop-shadow-lg animate-pulse w-full">
+                    Projeto Final | Grupo 08 - Turma 51 full start| React, Node.js, Tailwind, Vite, Express &amp; SQLite | CRUD funcional de migrantes e empresas
                 </div>
                 
                 <div className="flex items-center space-x-4">
