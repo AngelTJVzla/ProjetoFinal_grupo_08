@@ -92,7 +92,7 @@ function HomePage() {
                 <h3 className="font-bold text-[#002eff] mb-3 font-circe italic">
                   👥 Migrantes precisam de:
                 </h3>
-                <ul className="text-white space-y-2 font-circe font-medium">
+                <ul className="text-blue-900 space-y-2 font-circe font-medium">
                   <li>• Oportunidades de trabalho no Brasil.</li>
                   <li>• Empresas que valorizem sua experiência.</li>
                   <li>• Processos justos de contratação.</li>
@@ -103,7 +103,7 @@ function HomePage() {
                 <h3 className="font-bold text-[#002eff] mb-3 font-circe italic">
                   🏢 Empresas precisam de:
                 </h3>
-                <ul className="text-white space-y-2 font-circe font-medium">
+                <ul className="text-blue-900 space-y-2 font-circe font-medium">
                   <li>• Talentos qualificados e diversos.</li>
                   <li>• Profissionais com perspectivas globais.</li>
                   <li>• Equipes multiculturais.</li>
