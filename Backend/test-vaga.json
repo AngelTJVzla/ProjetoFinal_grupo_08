@@ -1,0 +1,11 @@
+{
+  "empresa_id": 24,
+  "titulo": "Desenvolvedor React Júnior",
+  "descripcion": "Vaga para desenvolvedor React com foco em interfaces modernas",
+  "salario": 4500.00,
+  "tipo_contrato": "CLT",
+  "nivel_experiencia": "Júnior",
+  "modalidade": "Remoto",
+  "requisitos": "Conhecimento em React, JavaScript, CSS",
+  "beneficios": "Vale alimentação, plano de saúde"
+}

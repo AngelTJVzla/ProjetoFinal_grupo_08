@@ -276,6 +276,295 @@ const createExpressRoutes = (entityName, operations, validator) => {
   return router;
 };
 
+// ========================================
+// NUEVOS ENDPOINTS RELACIONALES
+// ========================================
+
+// VAGAS - Gestión de ofertas de trabajo
+app.get('/vagas', (req, res) => {
+  const query = `
+    SELECT v.*, e.nombre as empresa_nombre, s.nome as setor_nome 
+    FROM Vagas v 
+    JOIN Empresas e ON v.empresa_id = e.id 
+    LEFT JOIN Setores s ON e.setor_id = s.id
+    WHERE v.ativa = 1
+    ORDER BY v.data_criacao DESC
+  `;
+  db.all(query, [], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao buscar vagas: ' + err.message });
+    }
+    res.json(rows);
+  });
+});
+
+app.post('/vagas', (req, res) => {
+  const { empresa_id, titulo, descripcion, salario, tipo_contrato, nivel_experiencia, modalidade, requisitos, beneficios, data_limite } = req.body;
+  
+  if (!empresa_id || !titulo || !descripcion) {
+    return res.status(400).json({ error: 'Empresa ID, título e descrição são obrigatórios' });
+  }
+
+  const query = `
+    INSERT INTO Vagas (empresa_id, titulo, descripcion, salario, tipo_contrato, nivel_experiencia, modalidade, requisitos, beneficios, data_limite)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+  
+  db.run(query, [empresa_id, titulo, descripcion, salario, tipo_contrato, nivel_experiencia, modalidade, requisitos, beneficios, data_limite], function(err) {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao criar vaga: ' + err.message });
+    }
+    res.status(201).json({ id: this.lastID, message: 'Vaga criada com sucesso!' });
+  });
+});
+
+app.put('/vagas/:id', (req, res) => {
+  const { id } = req.params;
+  const { empresa_id, titulo, descripcion, salario, tipo_contrato, nivel_experiencia, modalidade, requisitos, beneficios, data_limite } = req.body;
+  
+  if (!empresa_id || !titulo || !descripcion) {
+    return res.status(400).json({ error: 'Empresa ID, título e descrição são obrigatórios' });
+  }
+
+  const query = `
+    UPDATE Vagas 
+    SET empresa_id = ?, titulo = ?, descripcion = ?, salario = ?, tipo_contrato = ?, 
+        nivel_experiencia = ?, modalidade = ?, requisitos = ?, beneficios = ?, data_limite = ?
+    WHERE id = ?
+  `;
+  
+  db.run(query, [empresa_id, titulo, descripcion, salario, tipo_contrato, nivel_experiencia, modalidade, requisitos, beneficios, data_limite, id], function(err) {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao atualizar vaga: ' + err.message });
+    }
+    if (this.changes === 0) {
+      return res.status(404).json({ error: 'Vaga não encontrada' });
+    }
+    res.json({ message: 'Vaga atualizada com sucesso!' });
+  });
+});
+
+app.delete('/vagas/:id', (req, res) => {
+  const { id } = req.params;
+  
+  // Primeiro verificar se a vaga existe
+  db.get('SELECT id FROM Vagas WHERE id = ?', [id], (err, row) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao verificar vaga: ' + err.message });
+    }
+    if (!row) {
+      return res.status(404).json({ error: 'Vaga não encontrada' });
+    }
+    
+    // Deletar candidaturas relacionadas primeiro
+    db.run('DELETE FROM Candidaturas WHERE vaga_id = ?', [id], (err) => {
+      if (err) {
+        return res.status(500).json({ error: 'Erro ao deletar candidaturas relacionadas: ' + err.message });
+      }
+      
+      // Agora deletar a vaga
+      db.run('DELETE FROM Vagas WHERE id = ?', [id], function(err) {
+        if (err) {
+          return res.status(500).json({ error: 'Erro ao deletar vaga: ' + err.message });
+        }
+        res.json({ message: 'Vaga deletada com sucesso!' });
+      });
+    });
+  });
+});
+
+app.get('/empresas/:id/vagas', (req, res) => {
+  const { id } = req.params;
+  const query = `
+    SELECT * FROM Vagas 
+    WHERE empresa_id = ? 
+    ORDER BY data_criacao DESC
+  `;
+  db.all(query, [id], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao buscar vagas da empresa: ' + err.message });
+    }
+    res.json(rows);
+  });
+});
+
+// CANDIDATURAS - Gestión de aplicaciones
+app.post('/candidaturas', (req, res) => {
+  const { migrante_id, vaga_id, mensagem } = req.body;
+  
+  if (!migrante_id || !vaga_id) {
+    return res.status(400).json({ error: 'Migrante ID e Vaga ID são obrigatórios' });
+  }
+
+  const query = `INSERT INTO Candidaturas (migrante_id, vaga_id, mensagem) VALUES (?, ?, ?)`;
+  
+  db.run(query, [migrante_id, vaga_id, mensagem], function(err) {
+    if (err) {
+      if (err.message.includes('UNIQUE constraint failed')) {
+        return res.status(400).json({ error: 'Você já se candidatou para esta vaga' });
+      }
+      return res.status(500).json({ error: 'Erro ao criar candidatura: ' + err.message });
+    }
+    res.status(201).json({ id: this.lastID, message: 'Candidatura enviada com sucesso!' });
+  });
+});
+
+app.get('/migrantes/:id/candidaturas', (req, res) => {
+  const { id } = req.params;
+  const query = `
+    SELECT c.*, v.titulo as vaga_titulo, e.nombre as empresa_nombre 
+    FROM Candidaturas c 
+    JOIN Vagas v ON c.vaga_id = v.id 
+    JOIN Empresas e ON v.empresa_id = e.id 
+    WHERE c.migrante_id = ? 
+    ORDER BY c.data_candidatura DESC
+  `;
+  db.all(query, [id], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao buscar candidaturas: ' + err.message });
+    }
+    res.json(rows);
+  });
+});
+
+app.get('/vagas/:id/candidatos', (req, res) => {
+  const { id } = req.params;
+  const query = `
+    SELECT c.*, m.nombre as migrante_nome, m.email, p.nome as pais_nome 
+    FROM Candidaturas c 
+    JOIN Migrantes m ON c.migrante_id = m.id 
+    LEFT JOIN Paises p ON m.pais_id = p.id 
+    WHERE c.vaga_id = ? 
+    ORDER BY c.data_candidatura DESC
+  `;
+  db.all(query, [id], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao buscar candidatos: ' + err.message });
+    }
+    res.json(rows);
+  });
+});
+
+app.put('/candidaturas/:id/status', (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  
+  if (!['pendente', 'analisando', 'aprovado', 'rejeitado'].includes(status)) {
+    return res.status(400).json({ error: 'Status inválido' });
+  }
+
+  db.run('UPDATE Candidaturas SET status = ? WHERE id = ?', [status, id], function(err) {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao atualizar status: ' + err.message });
+    }
+    if (this.changes === 0) {
+      return res.status(404).json({ error: 'Candidatura não encontrada' });
+    }
+    res.json({ message: 'Status atualizado com sucesso!' });
+  });
+});
+
+// DADOS DE APOIO - Setores, Países, Habilidades, etc.
+app.get('/setores', (req, res) => {
+  db.all('SELECT * FROM Setores ORDER BY nome', [], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao buscar setores: ' + err.message });
+    }
+    res.json(rows);
+  });
+});
+
+app.get('/paises', (req, res) => {
+  db.all('SELECT * FROM Paises ORDER BY nome', [], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao buscar países: ' + err.message });
+    }
+    res.json(rows);
+  });
+});
+
+app.get('/habilidades', (req, res) => {
+  db.all('SELECT * FROM Habilidades ORDER BY categoria, nome', [], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao buscar habilidades: ' + err.message });
+    }
+    res.json(rows);
+  });
+});
+
+app.get('/idiomas', (req, res) => {
+  db.all('SELECT * FROM Idiomas ORDER BY nome', [], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao buscar idiomas: ' + err.message });
+    }
+    res.json(rows);
+  });
+});
+
+app.get('/tipos-ajuda', (req, res) => {
+  db.all('SELECT * FROM TiposAjuda ORDER BY nome', [], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao buscar tipos de ajuda: ' + err.message });
+    }
+    res.json(rows);
+  });
+});
+
+// HABILIDADES DE MIGRANTES
+app.post('/migrantes/:id/habilidades', (req, res) => {
+  const { id } = req.params;
+  const { habilidade_id, nivel } = req.body;
+  
+  const query = `INSERT INTO MigranteHabilidades (migrante_id, habilidade_id, nivel) VALUES (?, ?, ?)`;
+  
+  db.run(query, [id, habilidade_id, nivel], function(err) {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao adicionar habilidade: ' + err.message });
+    }
+    res.status(201).json({ message: 'Habilidade adicionada com sucesso!' });
+  });
+});
+
+app.get('/migrantes/:id/habilidades', (req, res) => {
+  const { id } = req.params;
+  const query = `
+    SELECT mh.*, h.nome, h.categoria 
+    FROM MigranteHabilidades mh 
+    JOIN Habilidades h ON mh.habilidade_id = h.id 
+    WHERE mh.migrante_id = ?
+  `;
+  db.all(query, [id], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao buscar habilidades: ' + err.message });
+    }
+    res.json(rows);
+  });
+});
+
+// MATCHING - Sistema de compatibilidade
+app.get('/migrantes/:id/vagas-compatibles', (req, res) => {
+  const { id } = req.params;
+  const query = `
+    SELECT DISTINCT v.*, e.nombre as empresa_nombre, 
+           COUNT(vh.habilidade_id) as habilidades_match
+    FROM Vagas v 
+    JOIN Empresas e ON v.empresa_id = e.id
+    LEFT JOIN VagaHabilidades vh ON v.id = vh.vaga_id
+    LEFT JOIN MigranteHabilidades mh ON vh.habilidade_id = mh.habilidade_id 
+                                      AND mh.migrante_id = ?
+    WHERE v.ativa = 1
+    GROUP BY v.id
+    ORDER BY habilidades_match DESC, v.data_criacao DESC
+    LIMIT 10
+  `;
+  db.all(query, [id], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao buscar vagas compatíveis: ' + err.message });
+    }
+    res.json(rows);
+  });
+});
+
 // Configurar rutas usando Express Router
 app.use('/migrantes', createExpressRoutes('Migrantes', migrantesOps, validateMigrante));
 app.use('/empresas', createExpressRoutes('Empresas', empresasOps, validateEmpresa));
@@ -296,14 +585,44 @@ app.get('/limpiar-empresas-sin-cnpj', (req, res) => {
 // Ruta para información de la API
 app.get('/', (req, res) => {
   res.json({
-    message: 'API Migrantes e Empresas',
-    version: '2.0.0',
+    message: 'API Migrantes e Empresas - Sistema Relacional',
+    version: '3.0.0',
     endpoints: {
+      // Entidades principais
       migrantes: '/migrantes',
       empresas: '/empresas',
+      
+      // Funcionalidades relacionais
+      vagas: '/vagas',
+      candidaturas: '/candidaturas',
+      
+      // Dados de apoio
+      setores: '/setores',
+      paises: '/paises',
+      habilidades: '/habilidades',
+      idiomas: '/idiomas',
+      tiposAjuda: '/tipos-ajuda',
+      
+      // Relacionamentos
+      vagasEmpresa: '/empresas/:id/vagas',
+      candidaturasMigrante: '/migrantes/:id/candidaturas',
+      candidatosVaga: '/vagas/:id/candidatos',
+      habilidadesMigrante: '/migrantes/:id/habilidades',
+      
+      // Sistema de matching
+      vagasCompativeis: '/migrantes/:id/vagas-compatibles',
+      
+      // Utils
       utils: '/limpiar-empresas-sin-cnpj'
     },
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    features: [
+      'Sistema de vagas e candidaturas',
+      'Matching baseado em habilidades',
+      'Dados normalizados (países, setores, habilidades)',
+      'Relacionamentos entre entidades',
+      'Sistema de status de candidaturas'
+    ]
   });
 });
 

@@ -29,6 +29,18 @@ function Header({ onLogout }) {
                         >
                             Empresas
                         </Link>
+                        <Link 
+                            to="/vagas" 
+                            className="text-blue-100 hover:text-white transition-colors font-semibold text-lg drop-shadow-sm"
+                        >
+                            Vagas
+                        </Link>
+                        <Link 
+                            to="/candidaturas" 
+                            className="text-blue-100 hover:text-white transition-colors font-semibold text-lg drop-shadow-sm"
+                        >
+                            Candidaturas
+                        </Link>
                     </nav>
                     
                     {onLogout && (
