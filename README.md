@@ -34,7 +34,6 @@ A plataforma agora conta com um **sistema completo de vagas e candidaturas** que
 - 🏷️ **Dados Normalizados** (países, setores, habilidades, idiomas)
 - 🔗 **Relacionamentos** entre todas as entidades
 - 📈 **Dashboard de Acompanhamento** para empresas e migrantes
-
 ---
 
 ## 🛠️ Tecnologias Utilizadas
@@ -158,6 +157,8 @@ npm run dev
 ### **💼 NOVO - Vagas de Emprego**
 - `GET /vagas` - Listar todas as vagas ativas
 - `POST /vagas` - Criar nova vaga
+- `PUT /vagas/:id` - Atualizar vaga completa
+- `DELETE /vagas/:id` - Remover vaga
 - `GET /empresas/:id/vagas` - Vagas de uma empresa específica
 
 ### **📋 NOVO - Candidaturas**
@@ -177,7 +178,6 @@ npm run dev
 - `GET /habilidades` - Listar habilidades disponíveis
 - `GET /idiomas` - Listar idiomas disponíveis
 - `GET /tipos-ajuda` - Listar tipos de ajuda disponíveis
-
 ### **📊 Utilitários**
 - `GET /` - Informações da API
 - `GET /limpiar-empresas-sin-cnpj` - Limpar empresas sem CNPJ
@@ -201,7 +201,7 @@ O sistema agora conta com uma **arquitetura relacional completa** com 13+ tabela
 - **Idiomas** - Idiomas falados pelos migrantes
 - **TiposAjuda** - Tipos de assistência oferecidos
 
-### **� Tabelas de Relacionamento**
+### **🔗 Tabelas de Relacionamento**
 - **MigranteHabilidades** - Habilidades de cada migrante
 - **MigranteIdiomas** - Idiomas falados por cada migrante
 - **VagaHabilidades** - Habilidades requeridas por vaga
