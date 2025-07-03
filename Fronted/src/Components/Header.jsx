@@ -41,6 +41,12 @@ function Header({ onLogout }) {
                         >
                             Candidaturas
                         </Link>
+                        <Link 
+                            to="/admin" 
+                            className="text-yellow-200 hover:text-yellow-100 transition-colors font-semibold text-lg drop-shadow-sm flex items-center"
+                        >
+                            🗄️ Admin
+                        </Link>
                     </nav>
                     
                     {onLogout && (
