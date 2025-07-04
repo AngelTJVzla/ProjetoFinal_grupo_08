@@ -554,26 +554,7 @@ app.get('/empresas/:id/vagas', (req, res) => {
   });
 });
 
-// CANDIDATURAS - Gestión de aplicaciones
-app.post('/candidaturas', (req, res) => {
-  const { migrante_id, vaga_id, mensagem } = req.body;
-  
-  if (!migrante_id || !vaga_id) {
-    return res.status(400).json({ error: 'Migrante ID e Vaga ID são obrigatórios' });
-  }
-
-  const query = `INSERT INTO Candidaturas (migrante_id, vaga_id, mensagem) VALUES (?, ?, ?)`;
-  
-  db.run(query, [migrante_id, vaga_id, mensagem], function(err) {
-    if (err) {
-      if (err.message.includes('UNIQUE constraint failed')) {
-        return res.status(400).json({ error: 'Você já se candidatou para esta vaga' });
-      }
-      return res.status(500).json({ error: 'Erro ao criar candidatura: ' + err.message });
-    }
-    res.status(201).json({ id: this.lastID, message: 'Candidatura enviada com sucesso!' });
-  });
-});
+// CANDIDATURAS - Gestión de aplicaciones (endpoint movido para seção relacional)
 
 app.get('/migrantes/:id/candidaturas', (req, res) => {
   const { id } = req.params;
@@ -937,14 +918,14 @@ app.post('/candidaturas', (req, res) => {
     return res.status(400).json({ error: "Dados inválidos", details: validationErrors });
   }
 
-  const { migrante_id, vaga_id, carta_apresentacao, pretensao_salarial } = req.body;
+  const { migrante_id, vaga_id, carta_apresentacao, pretensao_salarial, disponibilidade_inicio } = req.body;
 
   const query = `
-    INSERT INTO Candidaturas (migrante_id, vaga_id, carta_apresentacao, pretensao_salarial) 
-    VALUES (?, ?, ?, ?)
+    INSERT INTO Candidaturas (migrante_id, vaga_id, carta_apresentacao, pretensao_salarial, disponibilidade_inicio) 
+    VALUES (?, ?, ?, ?, ?)
   `;
 
-  db.run(query, [migrante_id, vaga_id, carta_apresentacao, pretensao_salarial], function(err) {
+  db.run(query, [migrante_id, vaga_id, carta_apresentacao, pretensao_salarial, disponibilidade_inicio], function(err) {
     if (err) {
       if (err.message.includes('UNIQUE constraint failed')) {
         return res.status(400).json({ error: 'Você já se candidatou a esta vaga' });
