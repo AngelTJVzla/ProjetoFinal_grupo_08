@@ -27,6 +27,13 @@
 - Criar uma ponte entre culturas e oportunidades
 - Contribuir para uma sociedade mais justa e equitativa
 
+### 🆕 **NOVIDADES - SISTEMA RELACIONAL**
+A plataforma agora conta com um **sistema completo de vagas e candidaturas** que inclui:
+- 📊 **Sistema de Matching** baseado em habilidades
+- 📋 **Gestão de Candidaturas** com status de acompanhamento
+- 🏷️ **Dados Normalizados** (países, setores, habilidades, idiomas)
+- 🔗 **Relacionamentos** entre todas as entidades
+- 📈 **Dashboard de Acompanhamento** para empresas e migrantes
 ---
 
 ## 🛠️ Tecnologias Utilizadas
@@ -34,7 +41,7 @@
 ### **Backend**
 - **Node.js** - Runtime JavaScript
 - **Express.js** - Framework web minimalista
-- **SQLite** - Base de dados local e simples
+- **SQLite** - Base de dados relacional local
 - **CORS** - Configuração de políticas de origem
 
 ### **Frontend**
@@ -45,10 +52,12 @@
 
 ### **Características**
 - ✅ **API RESTful** completa com operações CRUD
+- ✅ **Sistema Relacional** com 13+ tabelas interconectadas
 - ✅ **Interface moderna** e responsiva
 - ✅ **Base de dados local** (sem configuração complexa)
 - ✅ **Validações** de dados no frontend e backend
-- ✅ **Design system** consistente
+- ✅ **Sistema de Matching** inteligente
+- ✅ **Gestão de Candidaturas** completa
 
 ---
 
@@ -145,9 +154,59 @@ npm run dev
 - `PATCH /empresas/:id` - Atualizar empresa parcial
 - `DELETE /empresas/:id` - Remover empresa
 
+### **💼 NOVO - Vagas de Emprego**
+- `GET /vagas` - Listar todas as vagas ativas
+- `POST /vagas` - Criar nova vaga
+- `PUT /vagas/:id` - Atualizar vaga completa
+- `DELETE /vagas/:id` - Remover vaga
+- `GET /empresas/:id/vagas` - Vagas de uma empresa específica
+
+### **📋 NOVO - Candidaturas**
+- `POST /candidaturas` - Candidatar-se a uma vaga
+- `GET /migrantes/:id/candidaturas` - Candidaturas de um migrante
+- `GET /vagas/:id/candidatos` - Candidatos de uma vaga
+- `PUT /candidaturas/:id/status` - Atualizar status da candidatura
+
+### **🔗 NOVO - Relacionamentos e Habilidades**
+- `POST /migrantes/:id/habilidades` - Adicionar habilidade ao migrante
+- `GET /migrantes/:id/habilidades` - Habilidades de um migrante
+- `GET /migrantes/:id/vagas-compatibles` - Vagas compatíveis com o migrante
+
+### **📊 NOVO - Dados de Apoio**
+- `GET /setores` - Listar setores normalizados
+- `GET /paises` - Listar países normalizados
+- `GET /habilidades` - Listar habilidades disponíveis
+- `GET /idiomas` - Listar idiomas disponíveis
+- `GET /tipos-ajuda` - Listar tipos de ajuda disponíveis
 ### **📊 Utilitários**
 - `GET /` - Informações da API
 - `GET /limpiar-empresas-sin-cnpj` - Limpar empresas sem CNPJ
+
+---
+
+## 🗄️ Estrutura do Banco de Dados Relacional
+
+O sistema agora conta com uma **arquitetura relacional completa** com 13+ tabelas interconectadas:
+
+### **📋 Tabelas Principais**
+- **Migrantes** - Dados dos migrantes
+- **Empresas** - Dados das empresas
+- **Vagas** - Ofertas de emprego
+- **Candidaturas** - Aplicações para vagas
+
+### **🏷️ Tabelas de Normalização**
+- **Setores** - Setores empresariais normalizados
+- **Paises** - Países de origem normalizados
+- **Habilidades** - Competências técnicas e soft skills
+- **Idiomas** - Idiomas falados pelos migrantes
+- **TiposAjuda** - Tipos de assistência oferecidos
+
+### **🔗 Tabelas de Relacionamento**
+- **MigranteHabilidades** - Habilidades de cada migrante
+- **MigranteIdiomas** - Idiomas falados por cada migrante
+- **VagaHabilidades** - Habilidades requeridas por vaga
+- **EmpresaTiposAjuda** - Tipos de ajuda por empresa
+- **Experiencias** - Histórico profissional dos migrantes
 
 ---
 
@@ -157,13 +216,18 @@ npm run dev
 1. **Cadastro Completo** - Formulário com validações robustas
 2. **Perfil Profissional** - Registro de habilidades e experiências
 3. **Busca de Oportunidades** - Conexão com empresas inclusivas
-4. **Proteção de Dados** - Conformidade com LGPD
+4. **Sistema de Candidaturas** - Aplicação e acompanhamento de vagas
+5. **Matching Inteligente** - Vagas compatíveis com suas habilidades
+6. **Proteção de Dados** - Conformidade com LGPD
 
 ### **🏢 Para Empresas**
 1. **Registro Empresarial** - Cadastro com CNPJ e setores
-2. **Banco de Talentos** - Acesso a perfis qualificados
-3. **Diversidade** - Construção de equipes multiculturais
-4. **Responsabilidade Social** - Impacto social positivo
+2. **Publicação de Vagas** - Criação de ofertas detalhadas
+3. **Gestão de Candidatos** - Acompanhamento do processo seletivo
+4. **Banco de Talentos** - Acesso a perfis qualificados
+5. **Sistema de Matching** - Candidatos compatíveis automaticamente
+6. **Diversidade** - Construção de equipes multiculturais
+7. **Responsabilidade Social** - Impacto social positivo
 
 ### **🎨 Interface**
 - **Design Responsivo** - Funciona em todos os dispositivos
