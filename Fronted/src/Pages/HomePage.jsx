@@ -69,10 +69,10 @@ function HomePage() {
 
       {/* What is Esboço Alóctone - Clear Explanation */}
       <div className="container mx-auto px-6 py-1">
-        <h2 className="text-5xl md:text-6xl font-black text-center text-white mb-12 italic">
-          O <span className="text-[#78b3ff] italic">Que é ?</span>
+        <h2 className="text-5xl md:text-6xl font-black text-center text-white mb-12 italic drop-shadow-lg">
+          O <span className="text-[#78b3ff] italic drop-shadow-lg">Que é ?</span>
         </h2>
-         <p className="text-xl md:text-2xl text-blue-100 mb-12 text-center max-w-4xl mx-auto leading-relaxed font-medium">
+         <p className="text-xl md:text-2xl text-slate-500 mb-12 text-center max-w-4xl mx-auto leading-relaxed font-medium">
           Recepção e integração de pessoas migrantes.
         </p>
       </div>
@@ -92,7 +92,7 @@ function HomePage() {
                 <h3 className="font-bold text-[#002eff] mb-3 font-circe italic">
                   👥 Migrantes precisam de:
                 </h3>
-                <ul className="text-white space-y-2 font-circe font-medium">
+                <ul className="text-blue-900 space-y-2 font-circe font-medium">
                   <li>• Oportunidades de trabalho no Brasil.</li>
                   <li>• Empresas que valorizem sua experiência.</li>
                   <li>• Processos justos de contratação.</li>
@@ -103,7 +103,7 @@ function HomePage() {
                 <h3 className="font-bold text-[#002eff] mb-3 font-circe italic">
                   🏢 Empresas precisam de:
                 </h3>
-                <ul className="text-white space-y-2 font-circe font-medium">
+                <ul className="text-blue-900 space-y-2 font-circe font-medium">
                   <li>• Talentos qualificados e diversos.</li>
                   <li>• Profissionais com perspectivas globais.</li>
                   <li>• Equipes multiculturais.</li>
@@ -118,8 +118,8 @@ function HomePage() {
       {/* Detailed How it Works */}
       <div className="bg-gradient-to-br from-[#78b3ff] via-[#4480ff] to-[#1a4fff] pt-16 pb-24 relative overflow-hidden">
         <div className="container mx-auto px-12 relative">
-          <h2 className="text-5xl md:text-6xl font-black text-center text-white mb-12 italic">
-            Como <span className="text-[#78b3ff] italic">Funciona ?</span>
+          <h2 className="text-5xl md:text-6xl font-black text-center text-white mb-12 italic drop-shadow-lg">
+            Como <span className="text-[#78b3ff] italic drop-shadow-lg">Funciona ?</span>
           </h2>
            <p className="text-xl md:text-2xl text-blue-100 mb-12 text-center max-w-4xl mx-auto leading-relaxed font-medium">
             Processo simples e transparente em 3 passos para cada tipo de
@@ -290,10 +290,10 @@ function HomePage() {
       {/* Benefits Section */}
       <div className="bg-gradient-to-br from-[#78b3ff]/5 to-white py-12">
         <div className="container mx-auto px-6">
-           <h2 className="text-5xl md:text-6xl font-black text-center text-white mb-12 italic">
-            Porque Escolher <span className="text-[#78b3ff] italic">o Esboço Alóctone?</span>
+           <h2 className="text-5xl md:text-6xl font-black text-center text-white mb-12 italic drop-shadow-lg">
+            Porque Escolher <span className="text-[#78b3ff] italic drop-shadow-lg">o Esboço Alóctone?</span>
           </h2>
-           <p className="text-xl md:text-2xl text-blue-100 mb-12 text-center max-w-4xl mx-auto leading-relaxed font-medium">
+           <p className="text-xl md:text-2xl text-slate-500 mb-12 text-center max-w-4xl mx-auto leading-relaxed font-medium">
             Para construir sociedades mais justas, equitativas e resilientes
           </p>
 
@@ -382,8 +382,8 @@ function HomePage() {
       {/* Stats with real context */}
       <div className="bg-gradient-to-br from-[#002eff] to-[#0031ff] py-8">
         <div className="container mx-auto px-6">
-           <h2 className="text-5xl md:text-6xl font-black text-center text-white mb-12 italic">
-                      Nossos{" "} <span className="text-[#78b3ff] italic">resultados</span>
+           <h2 className="text-5xl md:text-6xl font-black text-center text-white mb-12 italic drop-shadow-lg">
+                      Nossos{" "} <span className="text-[#78b3ff] italic drop-shadow-lg">resultados</span>
           </h2>
            <p className="text-xl md:text-2xl text-blue-100 mb-12 text-center max-w-4xl mx-auto leading-relaxed font-medium">
             Alguns dos nossos KPIs resumidos
@@ -391,8 +391,8 @@ function HomePage() {
 
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div className="bg-white/25 backdrop-blur-lg rounded-3xl p-8 border-2 border-white/40 hover:bg-white/30 transition-all duration-300">
-              <div className="text-5xl font-black text-[#e8f141] mb-4">500+</div>
-              <h3 className="text-2xl font-bold text-[#0c71f5] mb-4">
+              <div className="text-5xl font-black text-yellow-400 mb-4">500+</div>
+              <h3 className="text-2xl font-bold text-blue-800 mb-4">
                 Migrantes Cadastrados
               </h3>
               <p className="text-neutral-700 font-medium">
@@ -401,8 +401,8 @@ function HomePage() {
             </div>
 
             <div className="bg-white/25 backdrop-blur-lg rounded-3xl p-8 border-2 border-white/40 hover:bg-white/30 transition-all duration-300">
-              <div className="text-5xl font-black text-[#e8f141] mb-4">150+</div>
-              <h3 className="text-2xl font-bold text-[#0c71f5] mb-4">
+              <div className="text-5xl font-black text-yellow-400 mb-4">150+</div>
+              <h3 className="text-2xl font-bold text-blue-800 mb-4">
                 Empresas Parceiras
               </h3>
              <p className="text-neutral-700 font-medium">
@@ -411,8 +411,8 @@ function HomePage() {
             </div>
 
             <div className="bg-white/25 backdrop-blur-lg rounded-3xl p-8 border-2 border-white/40 hover:bg-white/30 transition-all duration-300">
-              <div className="text-5xl font-black text-[#e8f141] mb-4">80%</div>
-              <h3 className="text-2xl font-bold text-[#0c71f5] mb-4">
+              <div className="text-5xl font-black text-yellow-400 mb-4">80%</div>
+              <h3 className="text-2xl font-bold text-blue-800 mb-4">
                 Taxa de Sucesso
               </h3>
             <p className="text-neutral-700 font-medium">
@@ -421,8 +421,8 @@ function HomePage() {
             </div>
 
             <div className="bg-white/25 backdrop-blur-lg rounded-3xl p-8 border-2 border-white/40 hover:bg-white/30 transition-all duration-300">
-              <div className="text-5xl font-black text-[#e8f141] mb-4">30+</div>
-              <h3 className="text-2xl font-bold text-[#0c71f5] mb-4">
+              <div className="text-5xl font-black text-yellow-400 mb-4">30+</div>
+              <h3 className="text-2xl font-bold text-blue-800 mb-4">
                 Países Representados
               </h3>
             <p className="text-neutral-700 font-medium">
@@ -436,10 +436,10 @@ function HomePage() {
       {/* FAQ Section */}
       <div className="bg-gradient-to-br from-[#78b3ff]/5 to-white py-24">
         <div className="container mx-auto px-6">
-           <h2 className="text-5xl md:text-6xl font-black text-center text-white mb-12 italic">
-                      Preguntas{" "} <span className="text-[#78b3ff] italic">frequentes</span>
+           <h2 className="text-5xl md:text-6xl font-black text-center text-white mb-12 italic drop-shadow-lg">
+                      Preguntas{" "} <span className="text-[#78b3ff] italic drop-shadow-lg">frequentes</span>
           </h2>
-          <p className="text-xl md:text-2xl text-blue-100 mb-12 text-center max-w-4xl mx-auto leading-relaxed font-medium">
+          <p className="text-xl md:text-2xl text-slate-400 mb-12 text-center max-w-4xl mx-auto leading-relaxed font-medium">
            Temos mais respostas que perguntas.
           </p>
 
