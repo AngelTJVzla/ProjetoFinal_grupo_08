@@ -130,7 +130,7 @@ function HomePage() {
             {/* Para Migrantes - Detailed Steps */}
             <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-10 border border-white">
               <div className="text-center mb-8">
-                <div className="w-20 h-20 bg-gradient-to-br from-[#002eff] to-[#0031ff] rounded-2xl mx-auto  flex items-center justify-center text-3xl"></div>
+                <div className="w-20 h-20 bg-gradient-to-br from-[#002eff] to-[#0031ff] rounded-2xl mx-auto  flex items-center justify-center text-3xl">👥</div>
                 <h3 className="text-3xl font-bold text-[#8ceb3e] mb-4">
                   Para Migrantes
                 </h3>
@@ -209,7 +209,7 @@ function HomePage() {
             {/* Para Empresas - Detailed Steps */}
             <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-10 border border-white/20">
               <div className="text-center mb-8">
-                <div className="w-20 h-20 bg-gradient-to-br from-[#002eff] to-[#0031ff] rounded-2xl mx-auto  flex items-center justify-center text-3xl"></div>
+                <div className="w-20 h-20 bg-gradient-to-br from-[#002eff] to-[#0031ff] rounded-2xl mx-auto  flex items-center justify-center text-3xl">🏢</div>
                 <h3 className="text-3xl font-bold text-[#8ceb3e] mb-4">
                   Para Empresas
                 </h3>
@@ -437,10 +437,10 @@ function HomePage() {
       <div className="bg-gradient-to-br from-[#78b3ff]/5 to-white py-24">
         <div className="container mx-auto px-6">
            <h2 className="text-5xl md:text-6xl font-black text-center text-white mb-12 italic drop-shadow-lg">
-                      Preguntas{" "} <span className="text-[#78b3ff] italic drop-shadow-lg">frequentes</span>
+                      Perguntas{" "} <span className="text-[#78b3ff] italic drop-shadow-lg">frequentes</span>
           </h2>
           <p className="text-xl md:text-2xl text-slate-400 mb-12 text-center max-w-4xl mx-auto leading-relaxed font-medium">
-           Temos mais respostas que perguntas.
+           Temos mais respostas do que perguntas.
           </p>
 
 
